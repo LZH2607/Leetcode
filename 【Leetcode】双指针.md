@@ -192,7 +192,7 @@ public:
 相关视频：
 [【忍者算法】LeetCode 18 四数之和](https://www.bilibili.com/video/BV1r341147JQ)
 
-我的AC代码？：
+我的AC代码：
 
 ```c++
 class Solution {
@@ -223,7 +223,8 @@ public:
 	}
 	void find(vector<int>& nums, int i, int j, int l_idx, int r_idx, int target) {
 		while (j < l_idx && l_idx < r_idx) {
-			long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[l_idx] + (long long)nums[r_idx];			if (sum == (long long)target) {
+			long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[l_idx] + (long long)nums[r_idx];
+			if (sum == (long long)target) {
 				vector<int> com = { nums[i], nums[j], nums[l_idx], nums[r_idx] };
 				res.push_back(com);
 				while (nums[l_idx] == nums[l_idx + 1] && l_idx + 1 < r_idx) {
