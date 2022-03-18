@@ -72,7 +72,6 @@ public:
 class Solution {
 public:
 	vector<vector<int>> res;
-	set<vector<int>> s;
 	int len;
 	vector<vector<int>> threeSum(vector<int>& nums) {
 		sort(nums.begin(), nums.end());
@@ -94,11 +93,7 @@ public:
 			int sum = nums[i] + nums[l_idx] + nums[r_idx];
 			if (sum == 0) {
 				vector<int> com = { nums[i], nums[l_idx], nums[r_idx] };
-				sort(com.begin(), com.end());
-				if (s.find(com) == s.end()) {
-					s.insert(com);
-					res.push_back(com);
-				}
+				res.push_back(com);
 				while (nums[l_idx] == nums[l_idx + 1] && l_idx + 1 < r_idx) {
 					l_idx += 1;
 				}
@@ -203,7 +198,6 @@ public:
 class Solution {
 public:
 	vector<vector<int>> res;
-	set<vector<int>> s;
 	int len;
 	vector<vector<int>> fourSum(vector<int>& nums, int target) {
 		sort(nums.begin(), nums.end());
@@ -229,14 +223,9 @@ public:
 	}
 	void find(vector<int>& nums, int i, int j, int l_idx, int r_idx, int target) {
 		while (j < l_idx && l_idx < r_idx) {
-			long long sum = nums[i] + nums[j] + nums[l_idx] + nums[r_idx];
-			if (sum == (long long)target) {
+			long long sum = (long long)nums[i] + (long long)nums[j] + (long long)nums[l_idx] + (long long)nums[r_idx];			if (sum == (long long)target) {
 				vector<int> com = { nums[i], nums[j], nums[l_idx], nums[r_idx] };
-				sort(com.begin(), com.end());
-				if (s.find(com) == s.end()) {
-					s.insert(com);
-					res.push_back(com);
-				}
+				res.push_back(com);
 				while (nums[l_idx] == nums[l_idx + 1] && l_idx + 1 < r_idx) {
 					l_idx += 1;
 				}
