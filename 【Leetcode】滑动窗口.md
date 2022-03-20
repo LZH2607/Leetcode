@@ -10,6 +10,7 @@
 | :---------------------: | :----------------------------------------------------------: | :--: |
 |        滑动窗口         | [https://leetcode-cn.com/tag/sliding-window/problemset/](https://leetcode-cn.com/tag/sliding-window/problemset/) | 题库 |
 | 3. 无重复字符的最长子串 | [https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) | 中等 |
+| 30. 串联所有单词的子串  | [https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/) | 困难 |
 |  209. 长度最小的子数组  | [https://leetcode-cn.com/problems/minimum-size-subarray-sum/](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) | 中等 |
 
 
@@ -61,6 +62,21 @@ public:
 		return maxLen;
 	}
 };
+```
+
+
+
+## 30. 串联所有单词的子串
+
+![](D:\Notes\Leetcode\Leetcode.assets\30-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\30-2.png)
+
+相关视频：
+[[字幕超清版]leetcode刷题笔记 串联所有单词的子串](https://www.bilibili.com/video/BV1nM4y1V7Wg)
+
+我的AC代码：
+
+```
 ```
 
 
