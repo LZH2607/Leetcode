@@ -115,3 +115,53 @@ vector<vector<int>> a = {
 print_vector_vector(a);
 ```
 
+
+
+## 打印map\<key, val\>
+
+```c++
+template<class key, class val>
+void print_map(map<key, val>& m) {
+	cout << "key  value" << endl;
+	cout << "----------" << endl;
+	for (typename map<key, val>::iterator it = m.begin(); it != m.end(); it++) {
+		cout << (*it).first << "  " << (*it).second << endl;
+	}
+}
+```
+
+调用示例：
+
+```c++
+map<string, int> m;;
+m["apple"] = 1;
+m["banana"] = 2;
+m["cat"] = 3;
+print_map(m);
+```
+
+
+
+## 打印unordered_map\<key, val\>
+
+```c++
+template<class key, class val>
+void print_unordered_map(unordered_map<key, val>& m) {
+	cout << "key  value" << endl;
+	cout << "----------" << endl;
+	for (typename unordered_map<key, val>::iterator it = m.begin(); it != m.end(); it++) {
+		cout << (*it).first << "  " << (*it).second << endl;
+	}
+}
+```
+
+调用示例：
+
+```c++
+unordered_map<string, int> m;;
+m["apple"] = 1;
+m["banana"] = 2;
+m["cat"] = 3;
+print_unordered_map(m);
+```
+
