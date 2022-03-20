@@ -29,11 +29,11 @@ print_1_dim_array(b, 5, 9);
 
 
 
-## 打印二维数组
+## 打印二维数组（一级指针）
 
 ```c++
 template<class T>
-void print_2_dim_array(T* a, int row1, int col1, int row2, int col2, int col) {
+void print_2_dim_array_by_pointer(T* a, int row1, int col1, int row2, int col2, int col) {
 	for (int i = row1; i <= row2; i++) {
 		for (int j = col1; j <= col2; j++) {
 			cout << a[i * col + j] << "  ";
@@ -60,8 +60,41 @@ double b[5][6] = {
 	{18.1, 19.1, 20.1, 21.1, 22.1, 23.1},
 	{24.1, 25.1, 26.1, 27.1, 28.1, 29.1}
 };
-print_2_dim_array((int*)a, 2, 1, 4, 5, 6);
-print_2_dim_array((double*)b, 2, 1, 3, 4, 6);
+print_2_dim_array_by_pointer((int*)a, 2, 1, 4, 5, 6);
+print_2_dim_array_by_pointer((double*)b, 2, 1, 3, 4, 6);
+```
+
+
+
+## 打印二维数组（二级指针）
+
+```c++
+template<class T>
+void print_2_dim_array_by_double_pointer(T** a, int row1, int col1, int row2, int col2) {
+	for (int i = row1; i <= row2; i++) {
+		for (int j = col1; j <= col2; j++) {
+			cout << a[i][j] << "  ";
+		}
+		cout << endl;
+	}
+}
+```
+
+调用示例：
+
+```c++
+int row = 4;
+int col = 5;
+int** a = (int**)malloc(sizeof(int*) * row);
+for (int i = 0; i < row; i++) {
+	a[i] = (int*)malloc(sizeof(int) * col);
+}
+for (int i = 0; i < row; i++) {
+	for (int j = 0; j < col; j++) {
+		a[i][j] = 10 * i + j;
+	}
+}
+print_2_dim_array_by_double_pointer(a, 1, 1, 3, 3);
 ```
 
 
