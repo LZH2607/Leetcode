@@ -6,14 +6,6 @@
 
 
 
-|    题目     |                             链接                             | 难度 |
-| :---------: | :----------------------------------------------------------: | :--: |
-|   哈希表    | [https://leetcode-cn.com/tag/hash-table/problemset/](https://leetcode-cn.com/tag/hash-table/problemset/) | 题库 |
-| 1. 两数之和 | [https://leetcode-cn.com/problems/two-sum/](https://leetcode-cn.com/problems/two-sum/) | 简单 |
-|             |                                                              |      |
-
-
-
 ## 1. 两数之和
 
 ![](D:\Notes\Leetcode\Leetcode.assets\1-1.png)

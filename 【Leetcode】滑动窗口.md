@@ -6,15 +6,6 @@
 
 
 
-|          题目           |                             链接                             | 难度 |
-| :---------------------: | :----------------------------------------------------------: | :--: |
-|        滑动窗口         | [https://leetcode-cn.com/tag/sliding-window/problemset/](https://leetcode-cn.com/tag/sliding-window/problemset/) | 题库 |
-| 3. 无重复字符的最长子串 | [https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/) | 中等 |
-| 30. 串联所有单词的子串  | [https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/](https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/) | 困难 |
-|  209. 长度最小的子数组  | [https://leetcode-cn.com/problems/minimum-size-subarray-sum/](https://leetcode-cn.com/problems/minimum-size-subarray-sum/) | 中等 |
-
-
-
 ## 3. 无重复字符的最长子串
 
 ![](D:\Notes\Leetcode\Leetcode.assets\3-1.png)
@@ -66,17 +57,41 @@ public:
 
 
 
-## 30. 串联所有单词的子串
+## 187. 重复的DNA序列
 
-![](D:\Notes\Leetcode\Leetcode.assets\30-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\30-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\187.png)
 
 相关视频：
-[[字幕超清版]leetcode刷题笔记 串联所有单词的子串](https://www.bilibili.com/video/BV1nM4y1V7Wg)
+[Leetcode刷题187. 重复的DNA序列 Repeated DNA Sequences](https://www.bilibili.com/video/BV1PQ4y1P7se)
 
 我的AC代码：
 
-```
+```c++
+class Solution {
+public:
+	vector<string> findRepeatedDnaSequences(string s) {
+		vector<string> res;
+		unordered_map<string, int> m;
+		int s_len = s.size();
+		int sub_len = 10;
+		for (int i = 0; i < s_len - sub_len + 1; i++) {
+			string sub = s.substr(i, sub_len);
+			unordered_map<string, int>::iterator it = m.find(sub);
+			if (it == m.end()) {
+				m[sub] = 1;
+			}
+			else {
+				(*it).second++;
+			}
+		}
+		for (unordered_map<string, int>::iterator it = m.begin(); it != m.end(); it++) {
+			if ((*it).second > 1) {
+				res.push_back((*it).first);
+			}
+		}
+		return res;
+	}
+};
 ```
 
 
@@ -125,5 +140,78 @@ public:
 		return minLen;
 	}
 };
+```
+
+
+
+## 219. 存在重复元素 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\219-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\219-2.png)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	bool containsNearbyDuplicate(vector<int>& nums, int k) {
+		int len = nums.size();
+		unordered_map<int, int> m;
+		if (k >= len) {
+			for (int i = 0; i < len; i++) {
+				unordered_map<int, int>::iterator it = m.find(nums[i]);
+				if (it == m.end()) {
+					m[nums[i]] = 1;
+				}
+				else {
+					(*it).second++;
+					if ((*it).second > 1) {
+						return true;
+					}
+				}
+			}
+		}
+		else {
+			for (int i = 0; i <= k; i++) {
+				unordered_map<int, int>::iterator it = m.find(nums[i]);
+				if (it == m.end()) {
+					m[nums[i]] = 1;
+				}
+				else {
+					(*it).second++;
+					if ((*it).second > 1) {
+						return true;
+					}
+				}
+			}
+			for (int i = k + 1; i < len; i++) {
+				m[nums[i - k - 1]]--;
+				unordered_map<int, int>::iterator it = m.find(nums[i]);
+				if (it == m.end()) {
+					m[nums[i]] = 1;
+				}
+				else {
+					(*it).second++;
+					if ((*it).second > 1) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+};
+```
+
+
+
+## 220. 存在重复元素 III
+
+![](D:\Notes\Leetcode\Leetcode.assets\220-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\220-2.png)
+
+我的AC代码：
+
+```
 ```
 

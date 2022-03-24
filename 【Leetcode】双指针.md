@@ -6,16 +6,6 @@
 
 
 
-|         题目         |                             链接                             | 难度 |
-| :------------------: | :----------------------------------------------------------: | :--: |
-|        双指针        | [https://leetcode-cn.com/tag/two-pointers/problemset/](https://leetcode-cn.com/tag/two-pointers/problemset/) | 题库 |
-|  11. 盛最多水的容器  | [https://leetcode-cn.com/problems/container-with-most-water/](https://leetcode-cn.com/problems/container-with-most-water/) | 中等 |
-|     15. 三数之和     | [https://leetcode-cn.com/problems/3sum/](https://leetcode-cn.com/problems/3sum/) | 中等 |
-| 16. 最接近的三数之和 | [https://leetcode-cn.com/problems/3sum-closest/](https://leetcode-cn.com/problems/3sum-closest/) | 中等 |
-|     18. 四数之和     | [https://leetcode-cn.com/problems/4sum/](https://leetcode-cn.com/problems/4sum/) | 中等 |
-
-
-
 ## 11. 盛最多水的容器
 
 ![](D:\Notes\Leetcode\Leetcode.assets\11-1.png)
