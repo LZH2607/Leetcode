@@ -40,3 +40,42 @@ public:
 };
 ```
 
+
+
+## 372. 超级次方
+
+![](D:\Notes\Leetcode\Leetcode.assets\372-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\372-2.png)
+
+相关视频：
+[每日一题｜Leetcode 372. 超级次方｜快速幂｜C++](https://www.bilibili.com/video/BV1AF411z7QK)
+
+模运算性质的证明：
+
+![](D:\Notes\Leetcode\Leetcode.assets\372-3.PNG)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	int superPow(int a, vector<int>& b) {
+		a = a % 1337;
+		int res = 1;
+		int len = b.size();
+		for(int i = 0; i < len; i++) {
+			res = pow(res, 10);
+			res = (res * pow(a, b[i])) % 1337;
+		}
+		return res;
+	}
+	int pow(int a, int n) {
+		int res = 1;
+		for (int i = 0; i < n; i++) {
+			res = (res * a) % 1337;
+		}
+		return res;
+	}
+};
+```
+
