@@ -15,7 +15,47 @@
 
 我的AC代码：
 
-```
+```c++
+class Solution {
+public:
+	string longestPalindrome(string s) {
+		int len = s.size();
+		int subLen = 1;
+		string sub = s.substr(0, 1);
+		bool** dp = (bool**)malloc(sizeof(bool*) * len);
+		for (int i = 0; i < len; i++) {
+			dp[i] = (bool*)malloc(sizeof(bool) * len);
+		}
+		for (int i = 0; i < len; i++) {
+			dp[i][i] = true;
+			if (i < len - 1) {
+				if (s[i] == s[i + 1]) {
+					dp[i][i + 1] = true;
+					subLen = 2;
+					sub = s.substr(i, subLen);
+				}
+				else {
+					dp[i][i + 1] = false;
+				}
+			}
+		}
+		for (int j = 2; j < len; j++) {
+			for (int i = 0; i < len - j; i++) {
+				if (s[i] != s[i + j]) {
+					dp[i][i + j] = false;
+				}
+				else {
+					dp[i][i + j] = dp[i + 1][i + j - 1];
+					if (dp[i][i + j] && j + 1 > subLen) {
+						subLen = j + 1;
+						sub = s.substr(i, j + 1);
+					}
+				}
+			}
+		}
+		return sub;
+	}
+};
 ```
 
 
@@ -58,6 +98,98 @@ public:
 			}
 		}
 		return maxDp;
+	}
+};
+```
+
+
+
+## 62. 不同路径
+
+![](D:\Notes\Leetcode\Leetcode.assets\62-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\62-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\62-3.png)
+
+相关视频：
+[力扣 Leetcode 62.  不同路径 Python算法 Leetcode 算法刷题 第62题 例子阐述 时间74% 极简代码 两种解法 清晰易懂 极简](https://www.bilibili.com/video/BV1zp4y1i7Zz?spm_id_from=333.851.header_right.history_list.click)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	int dp[100][100];
+	int uniquePaths(int m, int n) {
+		for (int j = 0; j < n; j++) {
+			dp[0][j] = 1;
+		}
+		for (int i = 0; i < m; i++) {
+			dp[i][0] = 1;
+		}
+		for (int i = 1; i < m; i++) {
+			for (int j = 1; j < n; j++) {
+				dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
+			}
+		}
+		return dp[m - 1][n - 1];
+	}
+};
+```
+
+
+
+## 63. 不同路径 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\63-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\63-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\63-3.png)
+
+相关视频：
+[力扣 Leetcode 63.  不同路径II Python算法 Leetcode 算法刷题 第63题 例子阐述 时间58% 极简代码 思路清晰易懂](https://www.bilibili.com/video/BV1gz4y1Q7Yu)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	int dp[100][100];
+	int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+		int m = obstacleGrid.size();
+		int n = obstacleGrid[0].size();
+		if (obstacleGrid[0][0] == 1) {
+			dp[0][0] = 0;
+		}
+		else {
+			dp[0][0] = 1;
+		}
+		
+		for (int j = 1; j < n; j++) {
+			if (obstacleGrid[0][j] == 1) {
+				dp[0][j] = 0;
+			}
+			else {
+				dp[0][j] = dp[0][j - 1];
+			}
+		}
+		for (int i = 1; i < m; i++) {
+			if (obstacleGrid[i][0] == 1) {
+				dp[i][0] = 0;
+			}
+			else {
+				dp[i][0] = dp[i - 1][0];
+			}
+		}
+		for (int i = 1; i < m; i++) {
+			for (int j = 1; j < n; j++) {
+				if (obstacleGrid[i][j] == 1) {
+					dp[i][j] = 0;
+				}
+				else {
+					dp[i][j] = dp[i][j - 1] + dp[i - 1][j];
+				}
+			}
+		}
+		return dp[m - 1][n - 1];
 	}
 };
 ```

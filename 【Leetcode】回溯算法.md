@@ -110,6 +110,56 @@ public:
 
 
 
+## 39. 组合总和
+
+![](D:\Notes\Leetcode\Leetcode.assets\39-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\39-2.png)
+
+相关视频：
+[带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！](https://www.bilibili.com/video/BV1KT4y1M7HJ)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	vector<vector<int>> vv;
+	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+		sort(candidates.begin(), candidates.end());
+		vector<int> v;
+		backtrack(candidates, v, target);
+		return vv;
+	}
+	void backtrack(vector<int>& candidates, vector<int>& v, int res) {
+		if (res == 0) {
+			vector<int> t = v;
+			sort(t.begin(), t.end());
+			if (find(vv.begin(), vv.end(), t) == vv.end()) {
+				vv.push_back(t);
+			}
+			return;
+		}
+		int len = candidates.size();
+		for (int i = 0; i < len; i++) {
+			if (candidates[i] <= res) {
+				v.push_back(candidates[i]);
+				backtrack(candidates, v, res - candidates[i]);
+				v.pop_back();
+			}
+		}
+		return;
+	}
+};
+```
+
+
+
+## 
+
+
+
+
+
 ## 77. 组合
 
 ![](D:\Notes\Leetcode\Leetcode.assets\77-1.png)

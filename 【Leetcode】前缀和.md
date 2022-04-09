@@ -6,6 +6,47 @@
 
 
 
+## 42. 接雨水
+
+![](D:\Notes\Leetcode\Leetcode.assets\42-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\42-2.png)
+
+相关视频：
+[Leetcode力扣 42.接雨水](https://www.bilibili.com/video/BV1zt4y197xL)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	int trap(vector<int>& height) {
+		int len = height.size();
+		int sum = 0;
+
+		int* lh = (int*)malloc(sizeof(int) * len);
+		lh[0] = 0;
+		for (int i = 1; i < len; i++) {
+			lh[i] = max(height[i - 1], lh[i - 1]);
+		}
+
+		int* rh = (int*)malloc(sizeof(int) * len);
+		rh[len - 1] = 0;
+		for (int i = len - 2; i >= 0; i--) {
+			rh[i] = max(height[i + 1], rh[i + 1]);
+		}
+
+		for (int i = 1; i < len - 1; i++) {
+			int h = min(lh[i], rh[i]);
+			sum += max(0, h - height[i]);
+		}
+
+		return sum;
+	}
+};
+```
+
+
+
 ## 238. 除自身以外数组的乘积
 
 ![](D:\Notes\Leetcode\Leetcode.assets\238-1.png)
