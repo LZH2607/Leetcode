@@ -110,6 +110,115 @@ public:
 
 
 
+## 37. 解数独
+
+![](D:\Notes\Leetcode\Leetcode.assets\37-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\37-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\37-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\37-4.png)
+
+相关视频：
+[【算法演示】回溯法求解数独，leetcode37题](https://www.bilibili.com/video/BV16U4y1E72g)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	bool cntRow[9][10];
+	bool cntCol[9][10];
+	bool cntSubBox[9][10];
+	void solveSudoku(vector<vector<char>>& board) {
+		initCnt(board);
+		backtrack(board, 0, 0);
+	}
+	void initCnt(vector<vector<char>>& board) {
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 10; j++) {
+				cntRow[i][j] = false;
+				cntCol[i][j] = false;
+				cntSubBox[i][j] = false;
+			}
+		}
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				if (board[i][j] != '.') {
+					int d = (int)board[i][j] - (int)'0';
+					int b = (i / 3) * 3 + j / 3;
+					cntRow[i][d] = true;
+					cntCol[j][d] = true;
+					cntSubBox[b][d] = true;
+				}
+				
+			}
+		}
+	}
+	bool backtrack(vector<vector<char>>& board, int i, int j) {
+		if (board[i][j] != '.') {
+			if (i == 8 && j == 8) {
+				return true;
+			}
+			else if (j < 8) {
+				return backtrack(board, i, j + 1);
+			}
+			else {
+				return backtrack(board, i + 1, 0);
+			}
+		}
+		else {
+			vector<int> ds = findDigits(i, j);
+			if (ds.size() != 0) {
+				for (vector<int>::iterator it = ds.begin(); it != ds.end(); it++) {
+					int d = *it;
+					setDigit(board, i, j, d);
+					if (i == 8 && j == 8) {
+						return true;
+					}
+					else if (j < 8) {
+						if (backtrack(board, i, j + 1)) {
+							return true;
+						}
+					}
+					else {
+						if (backtrack(board, i + 1, 0)) {
+							return true;
+						}
+					}
+					resetDigit(board, i, j, d);
+				}
+			}
+			return false;
+		}
+	}
+	vector<int> findDigits(int i, int j) {
+		vector<int> ds;
+		int b = (i / 3) * 3 + j / 3;
+		for (int d = 1; d < 10; d++) {
+			if (!cntRow[i][d] && !cntCol[j][d] && !cntSubBox[b][d]) {
+				ds.push_back(d);
+			}
+		}
+		return ds;
+	}
+	void setDigit(vector<vector<char>>& board, int i, int j, int d) {
+		board[i][j] = (char)(d + (int)'0');
+		int b = (i / 3) * 3 + j / 3;
+		cntRow[i][d] = true;
+		cntCol[j][d] = true;
+		cntSubBox[b][d] = true;
+	}
+	void resetDigit(vector<vector<char>>& board, int i, int j, int d) {
+		board[i][j] = '.';
+		int b = (i / 3) * 3 + j / 3;
+		cntRow[i][d] = false;
+		cntCol[j][d] = false;
+		cntSubBox[b][d] = false;
+	}
+};
+```
+
+
+
 ## 39. 组合总和
 
 ![](D:\Notes\Leetcode\Leetcode.assets\39-1.png)
@@ -151,12 +260,6 @@ public:
 	}
 };
 ```
-
-
-
-## 
-
-
 
 
 
