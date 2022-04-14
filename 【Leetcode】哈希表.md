@@ -212,3 +212,61 @@ public:
 };
 ```
 
+
+
+## 128. 最长连续序列
+
+![](D:\Notes\Leetcode\Leetcode.assets\128.png)
+
+相关视频：
+[最长连续序列](https://www.bilibili.com/video/BV1M7411A79B)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	int longestConsecutive(vector<int>& nums) {
+		unordered_map<int, int> m;
+		int maxLen = 0;
+		for (vector<int>::iterator it = nums.begin(); it != nums.end(); it++) {
+			int num = *it;
+			if (m.find(num) == m.end()) {
+				unordered_map<int, int>::iterator left = m.find(num - 1);
+				unordered_map<int, int>::iterator right = m.find(num + 1);
+				int len;
+				int lEnd;
+				int rEnd;
+				if (left == m.end() && right == m.end()) {
+					len = 1;
+					lEnd = num;
+					rEnd = num;
+				}
+				else if (left != m.end() && right == m.end()) {
+					len = (*left).second + 1;
+					lEnd = num - (*left).second;
+					rEnd = num;
+				}
+				else if (left == m.end() && right != m.end()) {
+					len = (*right).second + 1;
+					lEnd = num;
+					rEnd = num + (*right).second;
+				}
+				else {
+					len = (*left).second + (*right).second + 1;
+					lEnd = num - (*left).second;
+					rEnd = num + (*right).second;
+					m[num] = len;
+				}
+				m[lEnd] = len;
+				m[rEnd] = len;
+				if (len > maxLen) {
+					maxLen = len;
+				}
+			}
+		}
+		return maxLen;
+	}
+};
+```
+
