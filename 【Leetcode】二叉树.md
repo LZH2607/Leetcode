@@ -6,6 +6,82 @@
 
 
 
+## 94. 二叉树的中序遍历
+
+![](D:\Notes\Leetcode\Leetcode.assets\94-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\94-2.png)
+
+我的AC代码（递归算法）：
+
+```c++
+// Definition for a binary tree node.
+struct TreeNode {
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode(): val(0), left(nullptr), right(nullptr) {}
+	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+	vector<int> res;
+	vector<int> inorderTraversal(TreeNode* root) {
+		traversal(root);
+		return res;
+	}
+	void traversal(TreeNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		traversal(root->left);
+		res.push_back(root->val);
+		traversal(root->right);
+	}
+};
+```
+
+我的AC代码（迭代算法）：
+
+```c++
+// Definition for a binary tree node.
+struct TreeNode {
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode() : val(0), left(nullptr), right(nullptr) {}
+	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+	vector<int> res;
+	vector<TreeNode*> v;
+	vector<int> inorderTraversal(TreeNode* root) {
+		TreeNode* tp = root;
+		while (tp != nullptr) {
+			v.push_back(tp);
+			tp = tp->left;
+		}
+		while (v.size() != 0) {
+			tp = v.back();
+			v.pop_back();
+			res.push_back(tp->val);
+			tp = tp->right;
+			while (tp != nullptr) {
+				v.push_back(tp);
+				tp = tp->left;
+			}
+		}
+		return res;
+	}
+};
+```
+
+
+
 ## 105. 从前序与中序遍历序列构造二叉树
 
 ![](D:\Notes\Leetcode\Leetcode.assets\105-1.png)
@@ -32,7 +108,7 @@ public:
 	}
 	TreeNode* build(vector<int>& preorder, int pl, int pr, vector<int>& inorder, int il, int ir) {
 		if (pl > pr || il > ir) {
-			return NULL;
+			return nullptr;
 		}
 
 		int root = preorder[pl];
@@ -92,7 +168,7 @@ public:
 	}
 	TreeNode* build(vector<int>& inorder, int il, int ir, vector<int>& postorder, int pl, int pr) {
 		if (il > ir || pl > pr) {
-			return NULL;
+			return nullptr;
 		}
 
 		int root = postorder[pr];
