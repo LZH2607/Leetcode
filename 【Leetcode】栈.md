@@ -182,3 +182,135 @@ public:
 ```
 
 
+
+## 735. 行星碰撞
+
+![](D:\Notes\Leetcode\Leetcode.assets\735-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\735-2.png)
+
+相关题解：
+[行星碰撞](https://leetcode-cn.com/problems/asteroid-collision/solution/xing-xing-peng-zhuang-by-leetcode/)
+
+我的AC代码（解法1，写法1）：
+
+```c++
+class Solution {
+public:
+	vector<int> asteroidCollision(vector<int>& asteroids) {
+		vector<int> res;
+		deque<int> dq;
+		for (vector<int>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
+			int a = *it;
+			if (a > 0) {
+				dq.push_back(a);
+			}
+			else {
+				while (dq.size() != 0 && dq.back() < abs(a)) {
+					dq.pop_back();
+				}
+				if (dq.size() != 0 && dq.back() == abs(a)) {
+					dq.pop_back();
+					continue;
+				}
+				if (dq.size() == 0) {
+					res.push_back(a);
+				}
+			}
+		}
+		while (dq.size() != 0) {
+			res.push_back(dq.front());
+			dq.pop_front();
+		}
+		return res;
+	}
+};
+```
+
+我的AC代码（解法1，写法2）：
+
+```c++
+class Solution {
+public:
+	vector<int> asteroidCollision(vector<int>& asteroids) {
+		vector<int> res;
+		vector<int> v;
+		for (vector<int>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
+			int a = *it;
+			if (a > 0) {
+				v.push_back(a);
+			}
+			else {
+				while (v.size() != 0 && v.back() < abs(a)) {
+					v.pop_back();
+				}
+				if (v.size() != 0 && v.back() == abs(a)) {
+					v.pop_back();
+					continue;
+				}
+				if (v.size() == 0) {
+					res.push_back(a);
+				}
+			}
+		}
+		for (vector<int>::iterator it = v.begin(); it != v.end(); it++) {
+			res.push_back(*it);
+		}
+		return res;
+	}
+};
+```
+
+我的AC代码（解法2）：
+
+```c++
+class Solution {
+public:
+	vector<int> asteroidCollision(vector<int>& asteroids) {
+		vector<int> v1;
+		vector<int> v2 = asteroids;
+		int len1 = v1.size();
+		int len2 = v2.size();
+		while (len1 != len2 && len2 > 1) {
+			v1 = v2;
+			v2 = {};
+			len1 = v1.size();
+			// first
+			if (v1[0] < 0) {
+				v2.push_back(v1[0]);
+			}
+			else { // v1[0] > 0
+				if (v1[1] > 0 || v1[1] < 0 && abs(v1[0]) > abs(v1[1])) {
+					v2.push_back(v1[0]);
+				}
+			}
+			// middle
+			for (int i = 1; i < len1 - 1; i++) {
+				if (v1[i] < 0) {
+					if (v1[i - 1] > 0 && abs(v1[i]) <= abs(v1[i - 1])) {
+						continue;
+					}
+
+				}
+				else { // v1[i] > 0
+					if (v1[i + 1] < 0 && abs(v1[i]) <= abs(v1[i + 1])) {
+						continue;
+					}
+				}
+				v2.push_back(v1[i]);
+			}
+			// last
+			if (v1[len1 - 1] > 0) {
+				v2.push_back(v1[len1 - 1]);
+			}
+			else { // v1[len1 - 1] < 0
+				if (v1[len1 - 2] < 0 || v1[len1 - 2] > 0 && abs(v1[len1 - 1]) > abs(v1[len1 - 2])) {
+					v2.push_back(v1[len1 - 1]);
+				}
+			}
+			len2 = v2.size();
+		}
+		return v2;
+	}
+};
+```
+

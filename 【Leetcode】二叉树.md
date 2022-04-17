@@ -6,44 +6,6 @@
 
 
 
-## 94. 二叉树的中序遍历
-
-![](D:\Notes\Leetcode\Leetcode.assets\94-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\94-2.png)
-
-我的AC代码（递归算法）：
-
-```c++
-// Definition for a binary tree node.
-struct TreeNode {
-	int val;
-	TreeNode* left;
-	TreeNode* right;
-	TreeNode(): val(0), left(nullptr), right(nullptr) {}
-	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-};
-
-class Solution {
-public:
-	vector<int> res;
-	vector<int> inorderTraversal(TreeNode* root) {
-		traversal(root);
-		return res;
-	}
-	void traversal(TreeNode* root) {
-		if (root == nullptr) {
-			return;
-		}
-		traversal(root->left);
-		res.push_back(root->val);
-		traversal(root->right);
-	}
-};
-```
-
-我的AC代码（迭代算法）：
-
 ```c++
 // Definition for a binary tree node.
 struct TreeNode {
@@ -54,28 +16,370 @@ struct TreeNode {
 	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
+```
 
+
+
+## 94. 二叉树的中序遍历
+
+![](D:\Notes\Leetcode\Leetcode.assets\94-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\94-2.png)
+
+相关视频：
+[数据结构-浙江大学](https://www.bilibili.com/video/BV1JW411i731)
+
+我的AC代码（递归算法）：
+
+```c++
 class Solution {
 public:
 	vector<int> res;
-	vector<TreeNode*> v;
+	vector<int> inorderTraversal(TreeNode* root) {
+		traverse(root);
+		return res;
+	}
+	void traverse(TreeNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		traverse(root->left);
+		res.push_back(root->val);
+		traverse(root->right);
+	}
+};
+```
+
+我的AC代码（迭代算法，解法1）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	stack<TreeNode*> s;
 	vector<int> inorderTraversal(TreeNode* root) {
 		TreeNode* tp = root;
 		while (tp != nullptr) {
-			v.push_back(tp);
+			s.push(tp);
 			tp = tp->left;
 		}
-		while (v.size() != 0) {
-			tp = v.back();
-			v.pop_back();
+		while (s.size() != 0) {
+			tp = s.top();
+			s.pop();
 			res.push_back(tp->val);
 			tp = tp->right;
 			while (tp != nullptr) {
-				v.push_back(tp);
+				s.push(tp);
 				tp = tp->left;
 			}
 		}
 		return res;
+	}
+};
+```
+
+我的AC代码（迭代算法，解法2）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	stack<TreeNode*> s;
+	vector<int> inorderTraversal(TreeNode* root) {
+		TreeNode* tp = root;
+		while (tp != nullptr || s.size() != 0) {
+			while (tp != nullptr) {
+				s.push(tp);
+				tp = tp->left;
+			}
+			if (s.size() != 0) {
+				tp = s.top();
+				s.pop();
+				res.push_back(tp->val);
+				tp = tp->right;
+			}
+		}
+		return res;
+	}
+};
+```
+
+
+
+## 100. 相同的树
+
+![](D:\Notes\Leetcode\Leetcode.assets\100-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\100-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\100-3.png)
+
+相关视频：
+[LeetCode 100. 相同的树](https://www.bilibili.com/video/BV19m4y1976i)
+
+我的AC代码（递归算法）：
+
+```c++
+class Solution {
+public:
+	bool isSameTree(TreeNode* p, TreeNode* q) {
+		if (p == nullptr && q == nullptr) {
+			return true;
+		}
+		else if (p == nullptr && q != nullptr) {
+			return false;
+		}
+		else if (p != nullptr && q == nullptr) {
+			return false;
+		}
+		else if (p->val != q->val) {
+			return false;
+		}
+		else { // p->val == q->val
+			return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+		}
+	}
+};
+```
+
+我的AC代码（迭代算法）：
+
+```c++
+class Solution {
+public:
+	bool isSameTree(TreeNode* p, TreeNode* q) {
+		TreeNode* tp = p;
+		TreeNode* tq = q;
+		stack<TreeNode*> sp;
+		stack<TreeNode*> sq;
+
+		while (tp != nullptr && tq != nullptr || sp.size() != 0 && sq.size() != 0) {
+			while (tp != nullptr && tq != nullptr) {
+				if (tp->val != tq->val) {
+					return false;
+				}
+				sp.push(tp);
+				sq.push(tq);
+				tp = tp->left;
+				tq = tq->left;
+			}
+			if (tp == nullptr && tq != nullptr || tp != nullptr && tq == nullptr) {
+				return false;
+			}
+			if (sp.size() != 0 && sq.size() != 0) {
+				tp = sp.top();
+				tq = sq.top();
+				sp.pop();
+				sq.pop();
+				tp = tp->right;
+				tq = tq->right;
+			}
+		}
+
+		if (tp == nullptr && tq == nullptr) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+};
+```
+
+
+
+## 101. 对称二叉树
+
+![](D:\Notes\Leetcode\Leetcode.assets\101-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\101-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\101-3.png)
+
+我的AC代码（解法1，递归算法）：
+
+```c++
+class Solution {
+public:
+	vector<int> order1;
+	vector<int> order2;
+	int Null = 0xffffffff;
+	bool isSymmetric(TreeNode* root) {
+		traverse1(root);
+		traverse2(root);
+		int len = order1.size();
+		for (int i = 0; i < len; i++) {
+			if (order1[i] != order2[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+	void traverse1(TreeNode* root) {
+		order1.push_back(root->val);
+		if (root->left != nullptr) {
+			traverse1(root->left);
+		}
+		else {
+			order1.push_back(Null);
+		}
+		if (root->right != nullptr) {
+			traverse1(root->right);
+		}
+		else {
+			order1.push_back(Null);
+		}
+	}
+	void traverse2(TreeNode* root) {
+		order2.push_back(root->val);
+		if (root->right != nullptr) {
+			traverse2(root->right);
+		}
+		else {
+			order2.push_back(Null);
+		}
+		if (root->left != nullptr) {
+			traverse2(root->left);
+		}
+		else {
+			order2.push_back(Null);
+		}
+	}
+};
+```
+
+我的AC代码（解法1，迭代算法）：
+
+```c++
+class Solution {
+public:
+	vector<int> order1;
+	vector<int> order2;
+	int Null = 0xffffffff;
+	bool isSymmetric(TreeNode* root) {
+		traverse1(root);
+		traverse2(root);
+		int len = order1.size();
+		for (int i = 0; i < len; i++) {
+			if (order1[i] != order2[i]) {
+				return false;
+			}
+		}
+		return true;
+	}
+	void traverse1(TreeNode* root) {
+		stack<TreeNode*> s;
+		TreeNode* tp = root;
+		while (tp != nullptr || s.size() != 0) {
+			while (tp != nullptr) {
+				order1.push_back(tp->val);
+				s.push(tp);
+				tp = tp->left;
+			}
+			order1.push_back(Null);
+			if (s.size() != 0) {
+				tp = s.top();
+				s.pop();
+				tp = tp->right;
+			}
+		}
+	}
+	void traverse2(TreeNode* root) {
+		stack<TreeNode*> s;
+		TreeNode* tp = root;
+		while (tp != nullptr || s.size() != 0) {
+			while (tp != nullptr) {
+				order2.push_back(tp->val);
+				s.push(tp);
+				tp = tp->right;
+			}
+			order2.push_back(Null);
+			if (s.size() != 0) {
+				tp = s.top();
+				s.pop();
+				tp = tp->left;
+			}
+		}
+	}
+};
+```
+
+我的AC代码（解法2，递归算法）：
+
+```c++
+class Solution {
+public:
+	bool isSymmetric(TreeNode* root) {
+		if (root == nullptr) {
+			return true;
+		}
+		else {
+			return isSymmetricTree(root->left, root->right);
+		}
+	}
+	bool isSymmetricTree(TreeNode* p, TreeNode* q) {
+		if (p == nullptr && q == nullptr) {
+			return true;
+		}
+		else if (p == nullptr && q != nullptr) {
+			return false;
+		}
+		else if (p != nullptr && q == nullptr) {
+			return false;
+		}
+		else if (p->val != q->val) {
+			return false;
+		}
+		else { // p->val == q->val
+			return isSymmetricTree(p->left, q->right) && isSymmetricTree(p->right, q->left);
+		}
+	}
+};
+```
+
+我的AC代码（解法2，迭代算法）：
+
+```c++
+class Solution {
+public:
+	bool isSymmetric(TreeNode* root) {
+		if (root == nullptr) {
+			return true;
+		}
+		else {
+			return isSymmetricTree(root->left, root->right);
+		}
+	}
+	bool isSymmetricTree(TreeNode* p, TreeNode* q) {
+		TreeNode* tp = p;
+		TreeNode* tq = q;
+		stack<TreeNode*> sp;
+		stack<TreeNode*> sq;
+
+		while (tp != nullptr && tq != nullptr || sp.size() != 0 && sq.size() != 0) {
+			while (tp != nullptr && tq != nullptr) {
+				if (tp->val != tq->val) {
+					return false;
+				}
+				sp.push(tp);
+				sq.push(tq);
+				tp = tp->left;
+				tq = tq->right;
+			}
+			if (tp == nullptr && tq != nullptr || tp != nullptr && tq == nullptr) {
+				return false;
+			}
+			if (sp.size() != 0 && sq.size() != 0) {
+				tp = sp.top();
+				tq = sq.top();
+				sp.pop();
+				sq.pop();
+				tp = tp->right;
+				tq = tq->left;
+			}
+		}
+
+		if (tp == nullptr && tq == nullptr) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 };
 ```
@@ -90,16 +394,6 @@ public:
 我的AC代码：
 
 ```c++
-// Definition for a binary tree node.
-struct TreeNode {
-	int val;
-	TreeNode* left;
-	TreeNode* right;
-	TreeNode() : val(0), left(nullptr), right(nullptr) {}
-	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-};
-
 class Solution {
 public:
 	TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
@@ -150,16 +444,6 @@ public:
 我的AC代码：
 
 ```c++
-// Definition for a binary tree node.
-struct TreeNode {
-	int val;
-	TreeNode* left;
-	TreeNode* right;
-	TreeNode() : val(0), left(nullptr), right(nullptr) {}
-	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-	TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
-};
-
 class Solution {
 public:
 	TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
