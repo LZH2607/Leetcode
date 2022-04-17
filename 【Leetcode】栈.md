@@ -191,42 +191,7 @@ public:
 相关题解：
 [行星碰撞](https://leetcode-cn.com/problems/asteroid-collision/solution/xing-xing-peng-zhuang-by-leetcode/)
 
-我的AC代码（解法1，写法1）：
-
-```c++
-class Solution {
-public:
-	vector<int> asteroidCollision(vector<int>& asteroids) {
-		vector<int> res;
-		deque<int> dq;
-		for (vector<int>::iterator it = asteroids.begin(); it != asteroids.end(); it++) {
-			int a = *it;
-			if (a > 0) {
-				dq.push_back(a);
-			}
-			else {
-				while (dq.size() != 0 && dq.back() < abs(a)) {
-					dq.pop_back();
-				}
-				if (dq.size() != 0 && dq.back() == abs(a)) {
-					dq.pop_back();
-					continue;
-				}
-				if (dq.size() == 0) {
-					res.push_back(a);
-				}
-			}
-		}
-		while (dq.size() != 0) {
-			res.push_back(dq.front());
-			dq.pop_front();
-		}
-		return res;
-	}
-};
-```
-
-我的AC代码（解法1，写法2）：
+我的AC代码（解法1）：
 
 ```c++
 class Solution {
