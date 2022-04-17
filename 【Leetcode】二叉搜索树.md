@@ -122,3 +122,37 @@ public:
 };
 ```
 
+
+
+## 98. 验证二叉搜索树
+
+![](D:\Notes\Leetcode\Leetcode.assets\98-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\98-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\98-3.png)
+
+相关视频：
+[应届必备大厂面试题详解：验证二叉搜索树](https://www.bilibili.com/video/BV1c3411W7uX)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	vector<int> order;
+	bool isValidBST(TreeNode* root) {
+		if (root == nullptr) {
+			return true;
+		}
+		bool bl = isValidBST(root->left);
+		if (order.size() != 0 && order.back() >= root->val) {
+			return false;
+		}
+		else {
+			order.push_back(root->val);
+		}
+		bool br = isValidBST(root->right);
+		return bl && br;
+	}
+};
+```
+
