@@ -115,6 +115,53 @@ public:
 
 
 
+## 71. 简化路径
+
+![](D:\Notes\Leetcode\Leetcode.assets\71-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\71-2.png)
+
+相关视频：
+[【LeetCode 每日一题】71. 简化路径 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1qF411s7Jy)
+
+我的AC代码：
+
+```c++
+class Solution {
+public:
+	string simplifyPath(string path) {
+		vector<string> v;
+		string res;
+		path = path.substr(1);
+		if (path.back() != '/') {
+			path = path + "/";
+		}
+		int id = path.find('/');
+		while (id != -1) {
+			string file = path.substr(0, id);
+			path = path.substr(id + 1);
+			if (file == "..") {
+				if (v.size() != 0) {
+					v.pop_back();
+				}
+			}
+			else if (file != "" && file != ".") {
+				v.push_back(file);
+			}
+			id = path.find('/');
+		}
+		for (vector<string>::iterator it = v.begin(); it != v.end(); it++) {
+			res = res + "/" + *it;
+		}
+		if (v.size() == 0) {
+			res = "/";
+		}
+		return res;
+	}
+};
+```
+
+
+
 ## 150. 逆波兰表达式求值
 
 ![](D:\Notes\Leetcode\Leetcode.assets\150-1.png)
