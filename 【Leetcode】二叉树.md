@@ -49,35 +49,7 @@ public:
 };
 ```
 
-我的AC代码（迭代算法，解法1）：
-
-```c++
-class Solution {
-public:
-	vector<int> res;
-	stack<TreeNode*> s;
-	vector<int> inorderTraversal(TreeNode* root) {
-		TreeNode* tp = root;
-		while (tp != nullptr) {
-			s.push(tp);
-			tp = tp->left;
-		}
-		while (s.size() != 0) {
-			tp = s.top();
-			s.pop();
-			res.push_back(tp->val);
-			tp = tp->right;
-			while (tp != nullptr) {
-				s.push(tp);
-				tp = tp->left;
-			}
-		}
-		return res;
-	}
-};
-```
-
-我的AC代码（迭代算法，解法2）：
+我的AC代码（迭代算法）：
 
 ```c++
 class Solution {
@@ -483,4 +455,120 @@ public:
 	}
 };
 ```
+
+
+
+## 144. 二叉树的前序遍历
+
+![](D:\Notes\Leetcode\Leetcode.assets\144-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\144-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\144-3.png)
+
+我的AC代码（递归方法）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	vector<int> preorderTraversal(TreeNode* root) {
+		traverse(root);
+		return res;
+	}
+	void traverse(TreeNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		res.push_back(root->val);
+		traverse(root->left);
+		traverse(root->right);
+	}
+};
+```
+
+我的AC代码（迭代算法）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	stack<TreeNode*> s;
+	vector<int> preorderTraversal(TreeNode* root) {
+		TreeNode* tp = root;
+		while (tp != nullptr || s.size() != 0) {
+			while (tp != nullptr) {
+				res.push_back(tp->val);
+				s.push(tp);
+				tp = tp->left;
+			}
+			if (s.size() != 0) {
+				tp = s.top();
+				s.pop();
+				tp = tp->right;
+			}
+		}
+		return res;
+	}
+};
+```
+
+
+
+
+## 145. 二叉树的后序遍历
+
+![](D:\Notes\Leetcode\Leetcode.assets\145-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\145-2.png)
+
+我的AC代码（递归算法）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	vector<int> postorderTraversal(TreeNode* root) {
+		traverse(root);
+		return res;
+	}
+	void traverse(TreeNode* root) {
+		if (root == nullptr) {
+			return;
+		}
+		traverse(root->left);
+		traverse(root->right);
+		res.push_back(root->val);
+	}
+};
+```
+
+我的AC代码（迭代算法）：
+
+```c++
+class Solution {
+public:
+	vector<int> res;
+	stack<pair<TreeNode*, bool>> s;
+	vector<int> postorderTraversal(TreeNode* root) {
+		TreeNode* tp = root;
+		while (tp != nullptr || s.size() != 0) {
+			while (tp != nullptr) {
+				s.push(pair<TreeNode*, bool>(tp, true));
+				tp = tp->left;
+			}
+			if (s.size() != 0) {
+				if (s.top().second) {
+					tp = s.top().first;
+					s.top().second = false;
+					tp = tp->right;
+				}
+				else {
+					res.push_back(s.top().first->val);
+					s.pop();
+				}
+			}
+		}
+		return res;
+	}
+};
+```
+
 
