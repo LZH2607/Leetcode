@@ -14,10 +14,9 @@
 
 我的AC代码：
 
-```c++
+```java
 class Solution {
-public:
-	bool isValidSudoku(vector<vector<char>>& board) {
+	public boolean isValidSudoku(char[][] board) {
 		for (int i = 0; i < 9; i++) {
 			if (!checkRow(board, i)) {
 				return false;
@@ -37,46 +36,46 @@ public:
 		}
 		return true;
 	}
-	bool checkRow(vector<vector<char>>& board, int i) {
-		int cnt[10] = { false };
+
+	private boolean checkRow(char[][] board, int i) {
+		boolean cnt[] = new boolean[10];
 		for (int j = 0; j < 9; j++) {
 			if (board[i][j] != '.') {
-				int idx = (int)board[i][j] - (int)'0';
+				int idx = (int) board[i][j] - (int) '0';
 				if (cnt[idx]) {
 					return false;
-				}
-				else {
+				} else {
 					cnt[idx] = true;
 				}
 			}
 		}
 		return true;
 	}
-	bool checkCol(vector<vector<char>>& board, int j) {
-		int cnt[10] = { false };
+
+	private boolean checkCol(char[][] board, int j) {
+		boolean cnt[] = new boolean[10];
 		for (int i = 0; i < 9; i++) {
 			if (board[i][j] != '.') {
-				int idx = (int)board[i][j] - (int)'0';
+				int idx = (int) board[i][j] - (int) '0';
 				if (cnt[idx]) {
 					return false;
-				}
-				else {
+				} else {
 					cnt[idx] = true;
 				}
 			}
 		}
 		return true;
 	}
-	bool checkSubBox(vector<vector<char>>& board, int r, int c) {
-		int cnt[10] = { false };
+
+	private boolean checkSubBox(char[][] board, int r, int c) {
+		boolean cnt[] = new boolean[10];
 		for (int i = r; i < r + 3; i++) {
 			for (int j = c; j < c + 3; j++) {
 				if (board[i][j] != '.') {
-					int idx = (int)board[i][j] - (int)'0';
+					int idx = (int) board[i][j] - (int) '0';
 					if (cnt[idx]) {
 						return false;
-					}
-					else {
+					} else {
 						cnt[idx] = true;
 					}
 				}
@@ -84,6 +83,6 @@ public:
 		}
 		return true;
 	}
-};
+}
 ```
 
