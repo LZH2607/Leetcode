@@ -14,7 +14,7 @@
 相关视频：
 [7. 整数反转 - 力扣（LeetCode）C语言菜鸟通俗讲解](https://www.bilibili.com/video/BV1UL411T7yK)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -48,7 +48,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\9-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\9-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {

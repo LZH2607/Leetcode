@@ -28,7 +28,7 @@ struct TreeNode {
 相关视频：
 [【LeetCode 每日一题】95. 不同的二叉搜索树 II | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1LZ4y127cJ)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -87,7 +87,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\96-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\96-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -133,7 +133,7 @@ public:
 相关视频：
 [应届必备大厂面试题详解：验证二叉搜索树](https://www.bilibili.com/video/BV1c3411W7uX)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {

@@ -14,7 +14,7 @@
 相关视频：
 [5-7 「力扣」第 50 题：快速幂](https://www.bilibili.com/video/BV1HU4y1o7cN)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -54,7 +54,7 @@ public:
 
 ![](D:\Notes\Leetcode\Leetcode.assets\372-3.PNG)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {

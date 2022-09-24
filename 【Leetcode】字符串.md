@@ -10,6 +10,8 @@
 
 ![](D:\Notes\Leetcode\Leetcode.assets\14.png)
 
+我的AC代码（C++）：
+
 ```c++
 class Solution {
 public:

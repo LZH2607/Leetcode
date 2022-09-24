@@ -34,7 +34,7 @@ void backtrack(参数) {
 ![](D:\Notes\Leetcode\Leetcode.assets\17-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\17-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -79,7 +79,7 @@ public:
 相关视频：
 [Leetcode 22 括号生成 【递归+剪枝， 也可以回溯】](https://www.bilibili.com/video/BV1x5411j7KN)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -120,7 +120,7 @@ public:
 相关视频：
 [【算法演示】回溯法求解数独，leetcode37题](https://www.bilibili.com/video/BV16U4y1E72g)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -227,7 +227,7 @@ public:
 相关视频：
 [带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！](https://www.bilibili.com/video/BV1KT4y1M7HJ)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -271,7 +271,7 @@ public:
 相关视频：
 [带你学透回溯算法-组合问题（对应力扣题目：77.组合）| 回溯法精讲！](https://www.bilibili.com/video/BV1ti4y1L7cv)
 
-我的AC代码：
+我的AC代码（C++）：
 ```c++
 class Solution {
 public:

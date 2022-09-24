@@ -14,7 +14,7 @@
 相关视频：
 [Leetcode力扣 42.接雨水](https://www.bilibili.com/video/BV1zt4y197xL)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -55,7 +55,7 @@ public:
 相关视频：
 [Leetcode 238. 除自身以外数组的乘积 前缀和](https://www.bilibili.com/video/BV1HP4y157FM)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -93,7 +93,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\303-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\303-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class NumArray {
@@ -126,7 +126,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\304-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\304-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class NumMatrix {

@@ -15,7 +15,7 @@
 相关视频：
 [五分钟力扣 Leetcode 第11题 盛最多水的容器  Python入门算法刷题 解法 80%](https://www.bilibili.com/video/BV1uc411h7XA)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -56,7 +56,7 @@ public:
 相关视频：
 [三数之和题目解析](https://www.bilibili.com/video/BV1kU4y1a7Pj)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -116,7 +116,7 @@ public:
 
 ![](D:\Notes\Leetcode\Leetcode.assets\16.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -182,7 +182,7 @@ public:
 相关视频：
 [【忍者算法】LeetCode 18 四数之和](https://www.bilibili.com/video/BV1r341147JQ)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -242,5 +242,4 @@ public:
 	}
 };
 ```
-
 

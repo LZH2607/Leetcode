@@ -28,7 +28,7 @@ struct TreeNode {
 相关视频：
 [数据结构-浙江大学](https://www.bilibili.com/video/BV1JW411i731)
 
-我的AC代码（递归算法）：
+我的AC代码（C++，递归算法）：
 
 ```c++
 class Solution {
@@ -49,7 +49,7 @@ public:
 };
 ```
 
-我的AC代码（迭代算法）：
+我的AC代码（C++，迭代算法）：
 
 ```c++
 class Solution {
@@ -86,7 +86,7 @@ public:
 相关视频：
 [LeetCode 100. 相同的树](https://www.bilibili.com/video/BV19m4y1976i)
 
-我的AC代码（递归算法）：
+我的AC代码（C++，递归算法）：
 
 ```c++
 class Solution {
@@ -111,7 +111,7 @@ public:
 };
 ```
 
-我的AC代码（迭代算法）：
+我的AC代码（C++，迭代算法）：
 
 ```c++
 class Solution {
@@ -163,7 +163,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\101-2.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\101-3.png)
 
-我的AC代码（解法1，递归算法）：
+我的AC代码（C++，解法1，递归算法）：
 
 ```c++
 class Solution {
@@ -215,7 +215,7 @@ public:
 };
 ```
 
-我的AC代码（解法1，迭代算法）：
+我的AC代码（C++，解法1，迭代算法）：
 
 ```c++
 class Solution {
@@ -271,7 +271,7 @@ public:
 };
 ```
 
-我的AC代码（解法2，递归算法）：
+我的AC代码（C++，解法2，递归算法）：
 
 ```c++
 class Solution {
@@ -304,7 +304,7 @@ public:
 };
 ```
 
-我的AC代码（解法2，迭代算法）：
+我的AC代码（C++，解法2，迭代算法）：
 
 ```c++
 class Solution {
@@ -376,7 +376,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\105-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\105-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -426,7 +426,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\106-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\106-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -477,7 +477,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\144-2.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\144-3.png)
 
-我的AC代码（递归方法）：
+我的AC代码（C++，递归方法）：
 
 ```c++
 class Solution {
@@ -498,7 +498,7 @@ public:
 };
 ```
 
-我的AC代码（迭代算法）：
+我的AC代码（C++，迭代算法）：
 
 ```c++
 class Solution {
@@ -532,7 +532,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\145-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\145-2.png)
 
-我的AC代码（递归算法）：
+我的AC代码（C++，递归算法）：
 
 ```c++
 class Solution {
@@ -553,7 +553,7 @@ public:
 };
 ```
 
-我的AC代码（迭代算法）：
+我的AC代码（C++，迭代算法）：
 
 ```c++
 class Solution {

@@ -11,7 +11,7 @@
 ![](D:\Notes\Leetcode\Leetcode.assets\20-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\20-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -80,7 +80,7 @@ public:
 [[LeetCode]. 32 最长有效括号(7分) [动态规划系列]](https://www.bilibili.com/video/BV1VE411t75D)
 [LeetCode每日打卡.32.最长有效括号](https://www.bilibili.com/video/BV1Ct4y197M3)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -123,7 +123,7 @@ public:
 相关视频：
 [【LeetCode 每日一题】71. 简化路径 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1qF411s7Jy)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -168,7 +168,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\150-2.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\150-3.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -238,7 +238,7 @@ public:
 相关题解：
 [行星碰撞](https://leetcode-cn.com/problems/asteroid-collision/solution/xing-xing-peng-zhuang-by-leetcode/)
 
-我的AC代码（解法1）：
+我的AC代码（C++，解法1）：
 
 ```c++
 class Solution {
@@ -272,7 +272,7 @@ public:
 };
 ```
 
-我的AC代码（解法2）：
+我的AC代码（C++，解法2）：
 
 ```c++
 class Solution {

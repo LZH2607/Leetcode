@@ -14,7 +14,7 @@
 [程序员大厂面试必会算法 贪心算法中的经典题目 跳跃游戏 (LeetCode 55)](https://www.bilibili.com/video/BV1Sk4y1C7cD)
 
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {

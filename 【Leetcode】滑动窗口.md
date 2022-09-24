@@ -14,7 +14,7 @@
 相关视频：
 [力扣套路1：滑动窗口](https://www.bilibili.com/video/BV1GZ4y1N7Yu)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -64,7 +64,7 @@ public:
 相关视频：
 [Leetcode刷题187. 重复的DNA序列 Repeated DNA Sequences](https://www.bilibili.com/video/BV1PQ4y1P7se)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -104,7 +104,7 @@ public:
 相关视频：
 [LeetCode每日打卡.209.长度最小的子数组](https://www.bilibili.com/video/BV1UA411i77h)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -149,7 +149,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\219-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\219-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -210,7 +210,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\220-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\220-2.png)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```
 ```

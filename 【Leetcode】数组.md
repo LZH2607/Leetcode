@@ -13,7 +13,7 @@
 相关视频：
 [665. Non-decreasing Array 思路就一个 0290](https://www.youtube.com/watch?v=oURS2fk4T-w)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {

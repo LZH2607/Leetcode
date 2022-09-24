@@ -13,7 +13,7 @@
 相关视频：
 [Leetcode 5 最长回文子串 【动态规划解法】](https://www.bilibili.com/video/BV1AA411B7XV)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -69,7 +69,7 @@ public:
 [[LeetCode]. 32 最长有效括号(7分) [动态规划系列]](https://www.bilibili.com/video/BV1VE411t75D)
 [LeetCode每日打卡.32.最长有效括号](https://www.bilibili.com/video/BV1Ct4y197M3)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -113,7 +113,7 @@ public:
 相关视频：
 [力扣 Leetcode 62.  不同路径 Python算法 Leetcode 算法刷题 第62题 例子阐述 时间74% 极简代码 两种解法 清晰易懂 极简](https://www.bilibili.com/video/BV1zp4y1i7Zz?spm_id_from=333.851.header_right.history_list.click)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -147,7 +147,7 @@ public:
 相关视频：
 [力扣 Leetcode 63.  不同路径II Python算法 Leetcode 算法刷题 第63题 例子阐述 时间58% 极简代码 思路清晰易懂](https://www.bilibili.com/video/BV1gz4y1Q7Yu)
 
-我的AC代码：
+我的AC代码（C++）：
 
 ```c++
 class Solution {
@@ -193,5 +193,4 @@ public:
 	}
 };
 ```
-
 
