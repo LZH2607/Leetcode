@@ -6,8 +6,9 @@
 
 
 
+树节点的代码（C++）：
+
 ```c++
-// Definition for a binary tree node.
 struct TreeNode {
 	int val;
 	TreeNode* left;

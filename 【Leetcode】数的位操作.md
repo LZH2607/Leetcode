@@ -1,8 +1,79 @@
-# 【Leetcode】数与位
+# 【Leetcode】数的位操作
 
 
 
 [toc]
+
+
+
+## 数的位操作
+
+### 十进制数的位操作
+
+取十进制整数的每一位（C++）：
+
+```c++
+vector<int> getDigits(int x) {
+	vector<int> v;
+	while (x > 0) {
+		int d = x % 10;
+		x = x / 10;
+		v.push_back(d);
+	}
+	return v;
+}
+```
+
+取十进制小数的每一位（C++）：
+
+```
+```
+
+
+
+### 二进制数的位操作
+
+取二进制整数的每一位（C++）：
+
+```c++
+vector<int> getBits(int x) {
+	vector<int> v;
+	while (x > 0) {
+		int b = x & 1;
+		x = x >> 1;
+		v.push_back(b);
+	}
+	return v;
+}
+```
+
+取二进制小数的每一位（C++）：
+
+```
+```
+
+
+
+### R进制数的位操作
+
+取R进制整数的每一位（C++）：
+
+```c++
+vector<int> getDigits(int x, int r) {
+	vector<int> v;
+	while (x > 0) {
+		int d = x % r;
+		x = x / r;
+		v.push_back(d);
+	}
+	return v;
+}
+```
+
+取R进制小数的每一位（C++）：
+
+```
+```
 
 
 

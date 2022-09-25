@@ -72,10 +72,10 @@ public:
 	vector<string> findRepeatedDnaSequences(string s) {
 		vector<string> res;
 		unordered_map<string, int> m;
-		int s_len = s.size();
-		int sub_len = 10;
-		for (int i = 0; i < s_len - sub_len + 1; i++) {
-			string sub = s.substr(i, sub_len);
+		int sLen = s.size();
+		int subLen = 10;
+		for (int i = 0; i < sLen - subLen + 1; i++) {
+			string sub = s.substr(i, subLen);
 			unordered_map<string, int>::iterator it = m.find(sub);
 			if (it == m.end()) {
 				m[sub] = 1;

@@ -434,3 +434,61 @@ public:
 };
 ```
 
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> s = new HashSet<>();
+        HashMap<Integer, Integer> lm = new HashMap<>();
+        HashMap<Integer, Integer> rm = new HashMap<>();
+        int maxLen = 0;
+        for (int num : nums) {
+            if (s.contains(num)) {
+                continue;
+            }
+            s.add(num);
+            boolean l_flag = rm.containsKey(num + 1);
+            boolean r_flag = lm.containsKey(num - 1);
+            if (!l_flag && !r_flag) {
+                lm.put(num, num);
+                rm.put(num, num);
+                if (maxLen == 0) {
+                    maxLen = 1;
+                }
+            } else if (l_flag && !r_flag) {
+                int r_num = rm.get(num + 1);
+                rm.remove(num + 1);
+                rm.put(num, r_num);
+                lm.put(r_num, num);
+                int len = r_num - num + 1;
+                if (len > maxLen) {
+                    maxLen = len;
+                }
+            } else if (!l_flag && r_flag) {
+                int l_num = lm.get(num - 1);
+                lm.remove(num - 1);
+                lm.put(num, l_num);
+                rm.put(l_num, num);
+                int len = num - l_num + 1;
+                if (len > maxLen) {
+                    maxLen = len;
+                }
+            } else { // l_flag && r_flag
+                int l_num = lm.get(num - 1);
+                int r_num = rm.get(num + 1);
+                lm.remove(num - 1);
+                rm.remove(num + 1);
+                lm.put(r_num, l_num);
+                rm.put(l_num, r_num);
+                int len = r_num - l_num + 1;
+                if (len > maxLen) {
+                    maxLen = len;
+                }
+            }
+        }
+        return maxLen;
+    }
+}
+```
+
