@@ -246,3 +246,41 @@ class Solution {
 }
 ```
 
+
+
+## 1545. 找出第 N 个二进制字符串中的第 K 位
+
+![](D:\Notes\Leetcode\Leetcode.assets\1545-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1545-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public char findKthBit(int n, int k) {
+        ArrayList<boolean[]> l = new ArrayList<>();
+        l.add(new boolean[1]);
+        for (int i = 0; i < n - 1; i++) {
+            boolean[] s = getS(l.get(i));
+            l.add(s);
+        }
+        if (l.get(n - 1)[k - 1]) {
+            return '1';
+        }
+        return '0';
+    }
+
+    private boolean[] getS(boolean[] r) {
+        boolean[] s = new boolean[r.length * 2 + 1];
+        for (int i = 0; i < r.length; i++) {
+            s[i] = r[i];
+        }
+        s[r.length] = true;
+        for (int i = 0; i < r.length; i++) {
+            s[s.length - 1 - i] = !r[i];
+        }
+        return s;
+    }
+}
+```
+

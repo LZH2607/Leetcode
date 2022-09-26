@@ -24,9 +24,19 @@ vector<int> getDigits(int x) {
 }
 ```
 
-取十进制小数的每一位（C++）：
+取十进制小数的前n位（C++）：
 
-```
+```c++
+vector<int> getDigits(double x, int n) {
+	vector<int> v;
+	for (int i = 0; i < n; i++) {
+		x = x - (int)x;
+		x = x * 10;
+		int d = x;
+		v.push_back(d);
+	}
+	return v;
+}
 ```
 
 
@@ -47,9 +57,19 @@ vector<int> getBits(int x) {
 }
 ```
 
-取二进制小数的每一位（C++）：
+取二进制小数的前n位（C++）：
 
-```
+```c++
+vector<int> getBits(double x, int n) {
+	vector<int> v;
+	for (int i = 0; i < n; i++) {
+		x = x - (int)x;
+		x = x * 2;
+		int d = x;
+		v.push_back(d);
+	}
+	return v;
+}
 ```
 
 
@@ -70,9 +90,19 @@ vector<int> getDigits(int x, int r) {
 }
 ```
 
-取R进制小数的每一位（C++）：
+取R进制小数的前n位（C++）：
 
-```
+```c++
+vector<int> getDigits(double x, int r, int n) {
+	vector<int> v;
+	for (int i = 0; i < n; i++) {
+		x = x - (int)x;
+		x = x * r;
+		int d = x;
+		v.push_back(d);
+	}
+	return v;
+}
 ```
 
 
@@ -91,25 +121,39 @@ vector<int> getDigits(int x, int r) {
 class Solution {
 public:
 	int reverse(int x) {
-		int maxInt = 0x7fffffff;
 		int minInt = 0x80000000;
+		int maxInt = 0x7fffffff;
 		int y = 0;
 		while (x != 0) {
-			int b = x % 10;
-			if (y > maxInt / 10 || (y == maxInt / 10 && b > maxInt % 10)) {
-				y = 0;
-				break;
-			}
-			else if (y < minInt / 10 || (y == minInt / 10 && b < minInt % 10)) {
-				y = 0;
-				break;
-			}
-			y = y * 10 + b;
+			int d = x % 10;
 			x = x / 10;
+			if (y > maxInt / 10 - d / 10 || y < minInt / 10 - d / 10) {
+				return 0;
+			}
+			y = y * 10 + d;
 		}
 		return y;
 	}
 };
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int reverse(int x) {
+        int y = 0;
+        while (x != 0) {
+            int d = x % 10;
+            x = x / 10;
+            if (((y * 10 + d) - d) / 10 != y) {
+                return 0;
+            }
+            y = y * 10 + d;
+        }
+        return y;
+    }
+}
 ```
 
 
@@ -119,7 +163,7 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\9-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\9-2.png)
 
-我的AC代码（C++）：
+我的AC代码（C++，解法1）：
 
 ```c++
 class Solution {
@@ -154,5 +198,95 @@ public:
 		return flag;
 	}
 };
+```
+
+我的AC代码（C++，解法2）：
+
+```c++
+class Solution {
+public:
+	bool isPalindrome(int x) {
+		if (x < 0) {
+			return false;
+		}
+		long t = x;
+		long y = 0;
+		while (x > 0) {
+			int d = x % 10;
+			x = x / 10;
+			y = y * 10 + d;
+		}
+		if (y != t) {
+			return false;
+		}
+		return true;
+	}
+};
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        int t = x;
+        int y = 0;
+        while (x > 0) {
+            int d = x % 10;
+            x = x / 10;
+            y = y * 10 + d;
+        }
+        if (y != t) {
+            return false;
+        }
+        return true;
+    }
+}
+```
+
+
+
+## 393. UTF-8 编码验证
+
+![](D:\Notes\Leetcode\Leetcode.assets\393-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\393-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean validUtf8(int[] data) {
+        int num = 0;
+        int cnt = 0;
+        for (int i = 0; i < data.length; i++) {
+            if (cnt == 0) {
+                num = getNum(data, i);
+                cnt = num;
+            }
+            if (num != 0 && (num == cnt || (data[i] & 192) == 128)) {
+                cnt--;
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    private int getNum(int[] data, int i) {
+        if ((data[i] & 128) == 0 && i <= data.length - 1) {
+            return 1;
+        } else if ((data[i] & 224) == 192 && i <= data.length - 2) {
+            return 2;
+        } else if ((data[i] & 240) == 224 && i <= data.length - 3) {
+            return 3;
+        } else if ((data[i] & 248) == 240 && i <= data.length - 4) {
+            return 4;
+        }
+        return 0;
+    }
+}
 ```
 
