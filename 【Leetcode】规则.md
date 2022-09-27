@@ -49,6 +49,38 @@ public:
 };
 ```
 
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String prefix = "";
+        int minLen = 200;
+        for (String str : strs) {
+            if (str.length() < minLen) {
+                minLen = str.length();
+                prefix = str;
+            }
+        }
+        while (!prefix.equals("")) {
+            int len = prefix.length();
+            boolean flag = true;
+            for (String str : strs) {
+                if (!str.substring(0, len).equals(prefix)) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                break;
+            }
+            prefix = prefix.substring(0, len - 1);
+        }
+        return prefix;
+    }
+}
+```
+
 
 
 ## 36. 有效的数独
