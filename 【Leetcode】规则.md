@@ -316,3 +316,31 @@ class Solution {
 }
 ```
 
+
+
+## 1701. 平均等待时间
+
+![](D:\Notes\Leetcode\Leetcode.assets\1701-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1701-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public double averageWaitingTime(int[][] customers) {
+        long total = customers[0][1];
+        long finish = customers[0][0] + customers[0][1];
+        for (int i = 1; i < customers.length; i++) {
+            if (finish >= customers[i][0]) {
+                total += finish + customers[i][1] - customers[i][0];
+                finish += customers[i][1];
+            } else {
+                total += customers[i][1];
+                finish = customers[i][0] + customers[i][1];
+            }
+        }
+        return (double) total / (double) customers.length;
+    }
+}
+```
+
