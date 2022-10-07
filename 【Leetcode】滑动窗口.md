@@ -55,43 +55,37 @@ public:
 };
 ```
 
+我的AC代码（Java）：
 
-
-## 187. 重复的DNA序列
-
-![](D:\Notes\Leetcode\Leetcode.assets\187.png)
-
-相关视频：
-[Leetcode刷题187. 重复的DNA序列 Repeated DNA Sequences](https://www.bilibili.com/video/BV1PQ4y1P7se)
-
-我的AC代码（C++）：
-
-```c++
+```java
 class Solution {
-public:
-	vector<string> findRepeatedDnaSequences(string s) {
-		vector<string> res;
-		unordered_map<string, int> m;
-		int sLen = s.size();
-		int subLen = 10;
-		for (int i = 0; i < sLen - subLen + 1; i++) {
-			string sub = s.substr(i, subLen);
-			unordered_map<string, int>::iterator it = m.find(sub);
-			if (it == m.end()) {
-				m[sub] = 1;
-			}
-			else {
-				(*it).second++;
-			}
-		}
-		for (unordered_map<string, int>::iterator it = m.begin(); it != m.end(); it++) {
-			if ((*it).second > 1) {
-				res.push_back((*it).first);
-			}
-		}
-		return res;
-	}
-};
+    public int lengthOfLongestSubstring(String s) {
+        int l_idx = 0;
+        int r_idx = 0;
+        char l_c;
+        char r_c;
+        int[] cnt = new int[256];
+        int n = s.length();
+        int len = 0;
+        int maxLen = 0;
+        while (r_idx < n) {
+            r_c = s.charAt(r_idx);
+            cnt[r_c]++;
+            len++;
+            while (cnt[r_c] > 1) {
+                l_c = s.charAt(l_idx);
+                cnt[l_c]--;
+                len--;
+                l_idx++;
+            }
+            if (len > maxLen) {
+                maxLen = len;
+            }
+            r_idx++;
+        }
+        return maxLen;
+    }
+}
 ```
 
 
@@ -142,65 +136,42 @@ public:
 };
 ```
 
+我的AC代码：
 
-
-## 219. 存在重复元素 II
-
-![](D:\Notes\Leetcode\Leetcode.assets\219-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\219-2.png)
-
-我的AC代码（C++）：
-
-```c++
+```java
 class Solution {
-public:
-	bool containsNearbyDuplicate(vector<int>& nums, int k) {
-		int len = nums.size();
-		unordered_map<int, int> m;
-		if (k >= len) {
-			for (int i = 0; i < len; i++) {
-				unordered_map<int, int>::iterator it = m.find(nums[i]);
-				if (it == m.end()) {
-					m[nums[i]] = 1;
-				}
-				else {
-					(*it).second++;
-					if ((*it).second > 1) {
-						return true;
-					}
-				}
-			}
-		}
-		else {
-			for (int i = 0; i <= k; i++) {
-				unordered_map<int, int>::iterator it = m.find(nums[i]);
-				if (it == m.end()) {
-					m[nums[i]] = 1;
-				}
-				else {
-					(*it).second++;
-					if ((*it).second > 1) {
-						return true;
-					}
-				}
-			}
-			for (int i = k + 1; i < len; i++) {
-				m[nums[i - k - 1]]--;
-				unordered_map<int, int>::iterator it = m.find(nums[i]);
-				if (it == m.end()) {
-					m[nums[i]] = 1;
-				}
-				else {
-					(*it).second++;
-					if ((*it).second > 1) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-};
+    public int minSubArrayLen(int target, int[] nums) {
+        int l_idx = 0;
+        int r_idx = 0;
+        int l_num;
+        int r_num;
+        int sum = 0;
+        int len = 0;
+        int minLen = Integer.MAX_VALUE;
+        while (r_idx < nums.length) {
+            r_num = nums[r_idx];
+            sum += r_num;
+            len++;
+            while (sum > target) {
+                l_num = nums[l_idx];
+                if (sum - l_num < target) {
+                    break;
+                }
+                sum -= l_num;
+                len--;
+                l_idx++;
+            }
+            if (sum >= target && len < minLen) {
+                minLen = len;
+            }
+            r_idx++;
+        }
+        if (minLen == Integer.MAX_VALUE) {
+            minLen = 0;
+        }
+        return minLen;
+    }
+}
 ```
 
 
@@ -210,8 +181,46 @@ public:
 ![](D:\Notes\Leetcode\Leetcode.assets\220-1.png)
 ![](D:\Notes\Leetcode\Leetcode.assets\220-2.png)
 
-我的AC代码（C++）：
+我的AC代码（Java）：
 
-```
+```java
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int k, int t) {
+        if (k == 10000) {
+            return false;
+        }
+        if (nums.length <= k) {
+            for (int i = 0; i < nums.length - 1; i++) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    long min = (long) nums[i] - (long) t;
+                    long max = (long) nums[i] + (long) t;
+                    if (nums[j] >= min && nums[j] <= max) {
+                        return true;
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < nums.length - k; i++) {
+                for (int j = i + 1; j <= i + k; j++) {
+                    long min = (long) nums[i] - (long) t;
+                    long max = (long) nums[i] + (long) t;
+                    if (nums[j] >= min && nums[j] <= max) {
+                        return true;
+                    }
+                }
+            }
+            for (int i = nums.length - k; i < nums.length - 1; i++) {
+                for (int j = i + 1; j < nums.length; j++) {
+                    long min = (long) nums[i] - (long) t;
+                    long max = (long) nums[i] + (long) t;
+                    if (nums[j] >= min && nums[j] <= max) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
 ```
 

@@ -492,3 +492,161 @@ class Solution {
 }
 ```
 
+
+
+## 187. 重复的DNA序列
+
+相关视频：
+[Leetcode刷题187. 重复的DNA序列 Repeated DNA Sequences](https://www.bilibili.com/video/BV1PQ4y1P7se)
+
+![](D:\Notes\Leetcode\Leetcode.assets\187.png)
+
+我的AC代码（C++）：
+
+```c++
+class Solution {
+public:
+	vector<string> findRepeatedDnaSequences(string s) {
+		vector<string> res;
+		unordered_map<string, int> m;
+		int sLen = s.size();
+		int subLen = 10;
+		for (int i = 0; i < sLen - subLen + 1; i++) {
+			string sub = s.substr(i, subLen);
+			unordered_map<string, int>::iterator it = m.find(sub);
+			if (it == m.end()) {
+				m[sub] = 1;
+			}
+			else {
+				(*it).second++;
+			}
+		}
+		for (unordered_map<string, int>::iterator it = m.begin(); it != m.end(); it++) {
+			if ((*it).second > 1) {
+				res.push_back((*it).first);
+			}
+		}
+		return res;
+	}
+};
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        Map<String, Integer> m = new HashMap<>();
+        List<String> l = new ArrayList<>();
+        for (int i = 0; i <= s.length() - 10; i++) {
+            String subStr = s.substring(i, i + 10);
+            if (!m.containsKey(subStr)) {
+                m.put(subStr, 1);
+            } else {
+                m.put(subStr, m.get(subStr) + 1);
+            }
+        }
+        for (String subStr : m.keySet()) {
+            if (m.get(subStr) > 1) {
+                l.add(subStr);
+            }
+        }
+        return l;
+    }
+}
+```
+
+
+
+## 217. 存在重复元素
+
+![](D:\Notes\Leetcode\Leetcode.assets\217.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Set<Integer> s = new HashSet<>();
+        for (int num : nums) {
+            if (s.contains(num)) {
+                return true;
+            }
+            s.add(num);
+        }
+        return false;
+    }
+}
+```
+
+
+
+## 219. 存在重复元素 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\219-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\219-2.png)
+
+我的AC代码（C++）：
+
+```c++
+class Solution {
+public:
+	bool containsNearbyDuplicate(vector<int>& nums, int k) {
+		int len = nums.size();
+		unordered_map<int, vector<int>> m;
+		for (int i = 0; i < len; i++) {
+			int num = nums[i];
+			if (m.find(num) == m.end()) {
+				vector<int> v;
+				v.push_back(i);
+				m[num] = v;
+			}
+			else {
+				m[num].push_back(i);
+			}
+		}
+		for (unordered_map<int, vector<int>>::iterator it = m.begin(); it != m.end(); it++) {
+			vector<int> v = (*it).second;
+			sort(v.begin(), v.end());
+			int n = v.size();
+			for (int i = 0; i < n - 1; i++) {
+				if (abs(v[i] - v[i + 1]) <= k) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+};
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        Map<Integer, List<Integer>> m = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            if (!m.containsKey(num)) {
+                List<Integer> l = new ArrayList<>();
+                l.add(i);
+                m.put(num, l);
+            } else {
+                m.get(num).add(i);
+            }
+        }
+        for (int num : m.keySet()) {
+            List<Integer> l = m.get(num);
+            Collections.sort(l);
+            for (int i = 0; i < l.size() - 1; i++) {
+                if (Math.abs(l.get(i) - l.get(i + 1)) <= k) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+```
+
