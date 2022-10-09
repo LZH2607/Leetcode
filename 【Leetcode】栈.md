@@ -69,6 +69,55 @@ public:
 };
 ```
 
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean isValid(String s) {
+        int len = s.length();
+        Stack<Character> st = new Stack<>();
+        char c = s.charAt(0);
+        if (!isLeft(c)) {
+            return false;
+        }
+        st.push(c);
+        for (int i = 1; i < len; i++) {
+            c = s.charAt(i);
+            if (isLeft(c)) {
+                st.push(c);
+                continue;
+            }
+            if (st.empty()) {
+                return false;
+            }
+            char ch = st.pop();
+            if (!isPair(ch, c)) {
+                return false;
+            }
+        }
+        if (!st.empty()) {
+            return false;
+        }
+        return true;
+    }
+
+    boolean isLeft(char c) {
+        switch (c) {
+            case '(':
+            case '[':
+            case '{':
+                return true;
+            default:
+        }
+        return false;
+    }
+
+    boolean isPair(char c1, char c2) {
+        return c1 == '(' && c2 == ')' || c1 == '[' && c2 == ']' || c1 == '{' && c2 == '}';
+    }
+}
+```
+
 
 
 ## 71. 简化路径
@@ -114,6 +163,35 @@ public:
 		return res;
 	}
 };
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String simplifyPath(String path) {
+        String res = "";
+        Stack<String> s = new Stack<>();
+        String[] dirs = path.split("/+");
+
+        for (String dir : dirs) {
+            if (dir.equals("..")) {
+                if (s.empty()) {
+                    continue;
+                }
+                s.pop();
+            } else if (!dir.equals("") && !dir.equals(".")) {
+                s.push(dir);
+            }
+        }
+
+        for (String dir : s) {
+            res = res + "/" + dir;
+        }
+
+        return res.equals("") ? "/" : res;
+    }
+}
 ```
 
 
@@ -182,6 +260,249 @@ public:
 		return v[0];
 	}
 };
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> s = new Stack<>();
+
+        for (String token : tokens) {
+            if (!token.equals("+") && !token.equals("-") && !token.equals("*") && !token.equals("/")) {
+                s.push(Integer.parseInt(token));
+                continue;
+            }
+            int i1 = s.pop();
+            int i2 = s.pop();
+            int i3;
+            if (token.equals("+")) {
+                i3 = i2 + i1;
+            } else if (token.equals("-")) {
+                i3 = i2 - i1;
+            } else if (token.equals("*")) {
+                i3 = i2 * i1;
+            } else {  // token.equals("/")
+                i3 = i2 / i1;
+            }
+            s.push(i3);
+        }
+
+        return s.pop();
+    }
+}
+```
+
+
+
+## 224. 基本计算器
+
+![](D:\Notes\Leetcode\Leetcode.assets\224-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\224-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int calculate(String s) {
+        if (s.charAt(0) == '-') {
+            s = "0" + s;
+        }
+        String[] strs = s.replace(" ", "").replace("(-", "(0-").split("(?<=\\+|-|\\*|/|\\(|\\))|(?=\\+|-|\\*|/|\\(|\\))");
+        Stack<String> seq = new Stack<>();
+        Stack<String> sign = new Stack<>();
+        for (String str : strs) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/") && !str.equals("(") && !str.equals(")")) {
+                seq.push(str);
+                continue;
+            }
+            if (str.equals("(")) {
+                sign.push(str);
+                continue;
+            }
+            if (str.equals(")")) {
+                while (!sign.lastElement().equals("(")) {
+                    seq.push(sign.pop());
+                }
+                sign.pop();
+                continue;
+            }
+            while (!sign.isEmpty()) {
+                if (!prior(str, sign.lastElement())) {
+                    seq.push(sign.pop());
+                    continue;
+                }
+                break;
+            }
+            sign.push(str);
+        }
+        while (!sign.isEmpty()) {
+            seq.push(sign.pop());
+        }
+        Stack<Integer> st = new Stack<>();
+        for (String str : seq) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
+                st.push(Integer.parseInt(str));
+                continue;
+            }
+            int i1 = st.pop();
+            int i2 = st.pop();
+            int i3;
+            if (str.equals("+")) {
+                i3 = i2 + i1;
+            } else if (str.equals("-")) {
+                i3 = i2 - i1;
+            } else if (str.equals("*")) {
+                i3 = i2 * i1;
+            } else {  // str.equals("/")
+                i3 = i2 / i1;
+            }
+            st.push(i3);
+        }
+        return st.get(0);
+    }
+
+    boolean prior(String s1, String s2) {
+        int w1 = weight(s1);
+        int w2 = weight(s2);
+        return w1 > w2;
+    }
+
+    int weight(String s) {
+        if (s.equals("(")) {
+            return -1;
+        } else if (s.equals("+") || s.equals("-")) {
+            return 0;
+        }
+        return 1;  // s.equals("*") || s.equals("/")
+    }
+}
+```
+
+
+
+## 227. 基本计算器 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\227-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\227-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int calculate(String s) {
+        String[] strs = s.replace(" ", "").split("(?<=\\+|-|\\*|/)|(?=\\+|-|\\*|/)");
+        Stack<String> seq = new Stack<>();
+        Stack<String> sign = new Stack<>();
+        for (String str : strs) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
+                seq.push(str);
+                continue;
+            }
+            while (!sign.isEmpty()) {
+                if (!prior(str, sign.lastElement())) {
+                    seq.push(sign.pop());
+                    continue;
+                }
+                break;
+            }
+            sign.push(str);
+        }
+        while (!sign.isEmpty()) {
+            seq.push(sign.pop());
+        }
+        Stack<Integer> st = new Stack<>();
+        for (String str : seq) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
+                st.push(Integer.parseInt(str));
+                continue;
+            }
+            int i1 = st.pop();
+            int i2 = st.pop();
+            int i3;
+            if (str.equals("+")) {
+                i3 = i2 + i1;
+            } else if (str.equals("-")) {
+                i3 = i2 - i1;
+            } else if (str.equals("*")) {
+                i3 = i2 * i1;
+            } else {  // str.equals("/")
+                i3 = i2 / i1;
+            }
+            st.push(i3);
+        }
+        return st.get(0);
+    }
+
+    boolean prior(String s1, String s2) {
+        int w1 = weight(s1);
+        int w2 = weight(s2);
+        return w1 > w2;
+    }
+
+    int weight(String s) {
+        if (s.equals("+") || s.equals("-")) {
+            return 0;
+        }
+        return 1;  // s.equals("*") || s.equals("/")
+    }
+}
+```
+
+
+
+## 636. 函数的独占时间
+
+![](D:\Notes\Leetcode\Leetcode.assets\636-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\636-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\636-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\636-4.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int[] total;
+
+    public int[] exclusiveTime(int n, List<String> logs) {
+        total = new int[n];
+        Stack<Function> s = new Stack<>();
+        for (String log : logs) {
+            String[] strs = log.split(":");
+            int id = Integer.parseInt(strs[0]);
+            String status = strs[1];
+            int timestamp = Integer.parseInt(strs[2]);
+            if (status.equals("start")) {
+                if (!s.empty()) {
+                    s.lastElement().sum += timestamp - s.lastElement().timestamp;
+                    s.lastElement().timestamp = timestamp;
+                }
+                s.push(new Function(id, timestamp, 0));
+            } else {  // status.equals("end")
+                Function f = s.pop();
+                f.sum += timestamp - f.timestamp + 1;
+                total[f.id] += f.sum;
+                if (!s.empty()) {
+                    s.lastElement().timestamp = timestamp + 1;
+                }
+            }
+        }
+        return total;
+    }
+}
+
+class Function {
+    int id;
+    int timestamp;
+    int sum;
+
+    public Function(int id, int timestamp, int sum) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.sum = sum;
+    }
+}
 ```
 
 
@@ -280,5 +601,131 @@ public:
 		return v2;
 	}
 };
+```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> s = new Stack<>();
+        for (int a : asteroids) {
+            if (s.empty()) {
+                s.push(a);
+                continue;
+            }
+            boolean flag = true;
+            while (!s.empty()) {
+                int i = s.lastElement();
+                if ((i > 0 && a > 0) || i < 0) {
+                    break;
+                } else if (i > -a) {  // i > 0 && a < 0
+                    flag = false;
+                    break;
+                } else if (i == -a) {
+                    s.pop();
+                    flag = false;
+                    break;
+                } else {  // i < -a
+                    s.pop();
+                }
+            }
+            if (flag) {
+                s.push(a);
+            }
+        }
+        int[] res = new int[s.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = s.get(i);
+        }
+        return res;
+    }
+}
+```
+
+
+
+## 772. 基本计算器 III
+
+![](D:\Notes\Leetcode\Leetcode.assets\772-1.png)
+![](D:\Notes\Leetcode\Leetcode.assets\772-2.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int calculate(String s) {
+        if (s.charAt(0) == '-') {
+            s = "0" + s;
+        }
+        String[] strs = s.replace(" ", "").replace("(-", "(0-").split("(?<=\\+|-|\\*|/|\\(|\\))|(?=\\+|-|\\*|/|\\(|\\))");
+        Stack<String> seq = new Stack<>();
+        Stack<String> sign = new Stack<>();
+        for (String str : strs) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/") && !str.equals("(") && !str.equals(")")) {
+                seq.push(str);
+                continue;
+            }
+            if (str.equals("(")) {
+                sign.push(str);
+                continue;
+            }
+            if (str.equals(")")) {
+                while (!sign.lastElement().equals("(")) {
+                    seq.push(sign.pop());
+                }
+                sign.pop();
+                continue;
+            }
+            while (!sign.isEmpty()) {
+                if (!prior(str, sign.lastElement())) {
+                    seq.push(sign.pop());
+                    continue;
+                }
+                break;
+            }
+            sign.push(str);
+        }
+        while (!sign.isEmpty()) {
+            seq.push(sign.pop());
+        }
+        Stack<Integer> st = new Stack<>();
+        for (String str : seq) {
+            if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
+                st.push(Integer.parseInt(str));
+                continue;
+            }
+            int i1 = st.pop();
+            int i2 = st.pop();
+            int i3;
+            if (str.equals("+")) {
+                i3 = i2 + i1;
+            } else if (str.equals("-")) {
+                i3 = i2 - i1;
+            } else if (str.equals("*")) {
+                i3 = i2 * i1;
+            } else {  // str.equals("/")
+                i3 = i2 / i1;
+            }
+            st.push(i3);
+        }
+        return st.get(0);
+    }
+
+    boolean prior(String s1, String s2) {
+        int w1 = weight(s1);
+        int w2 = weight(s2);
+        return w1 > w2;
+    }
+
+    int weight(String s) {
+        if (s.equals("(")) {
+            return -1;
+        } else if (s.equals("+") || s.equals("-")) {
+            return 0;
+        }
+        return 1;  // s.equals("*") || s.equals("/")
+    }
+}
 ```
 
