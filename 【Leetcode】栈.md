@@ -8,8 +8,7 @@
 
 ## 20. 有效的括号
 
-![](D:\Notes\Leetcode\Leetcode.assets\20-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\20-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\20.png)
 
 我的AC代码（C++）：
 
@@ -75,27 +74,27 @@ public:
 class Solution {
     public boolean isValid(String s) {
         int len = s.length();
-        Stack<Character> st = new Stack<>();
+        Deque<Character> d = new ArrayDeque<>();
         char c = s.charAt(0);
         if (!isLeft(c)) {
             return false;
         }
-        st.push(c);
+        d.push(c);
         for (int i = 1; i < len; i++) {
             c = s.charAt(i);
             if (isLeft(c)) {
-                st.push(c);
+                d.push(c);
                 continue;
             }
-            if (st.empty()) {
+            if (d.isEmpty()) {
                 return false;
             }
-            char ch = st.pop();
+            char ch = d.pop();
             if (!isPair(ch, c)) {
                 return false;
             }
         }
-        if (!st.empty()) {
+        if (!d.isEmpty()) {
             return false;
         }
         return true;
@@ -122,8 +121,7 @@ class Solution {
 
 ## 71. 简化路径
 
-![](D:\Notes\Leetcode\Leetcode.assets\71-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\71-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\71.png)
 
 相关视频：
 [【LeetCode 每日一题】71. 简化路径 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1qF411s7Jy)
@@ -171,22 +169,23 @@ public:
 class Solution {
     public String simplifyPath(String path) {
         String res = "";
-        Stack<String> s = new Stack<>();
+        Deque<String> d = new ArrayDeque<>();
         String[] dirs = path.split("/+");
 
         for (String dir : dirs) {
             if (dir.equals("..")) {
-                if (s.empty()) {
+                if (d.isEmpty()) {
                     continue;
                 }
-                s.pop();
+                d.pop();
             } else if (!dir.equals("") && !dir.equals(".")) {
-                s.push(dir);
+                d.push(dir);
             }
         }
 
-        for (String dir : s) {
-            res = res + "/" + dir;
+        Iterator<String> it = d.descendingIterator();
+        while (it.hasNext()) {
+            res = res + "/" + it.next();
         }
 
         return res.equals("") ? "/" : res;
@@ -198,9 +197,7 @@ class Solution {
 
 ## 150. 逆波兰表达式求值
 
-![](D:\Notes\Leetcode\Leetcode.assets\150-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\150-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\150-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\150.png)
 
 我的AC代码（C++）：
 
@@ -267,15 +264,15 @@ public:
 ```java
 class Solution {
     public int evalRPN(String[] tokens) {
-        Stack<Integer> s = new Stack<>();
+        Deque<Integer> d = new ArrayDeque<>();
 
         for (String token : tokens) {
             if (!token.equals("+") && !token.equals("-") && !token.equals("*") && !token.equals("/")) {
-                s.push(Integer.parseInt(token));
+                d.push(Integer.parseInt(token));
                 continue;
             }
-            int i1 = s.pop();
-            int i2 = s.pop();
+            int i1 = d.pop();
+            int i2 = d.pop();
             int i3;
             if (token.equals("+")) {
                 i3 = i2 + i1;
@@ -286,10 +283,10 @@ class Solution {
             } else {  // token.equals("/")
                 i3 = i2 / i1;
             }
-            s.push(i3);
+            d.push(i3);
         }
 
-        return s.pop();
+        return d.pop();
     }
 }
 ```
@@ -298,8 +295,7 @@ class Solution {
 
 ## 224. 基本计算器
 
-![](D:\Notes\Leetcode\Leetcode.assets\224-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\224-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\224.png)
 
 我的AC代码（Java）：
 
@@ -310,8 +306,8 @@ class Solution {
             s = "0" + s;
         }
         String[] strs = s.replace(" ", "").replace("(-", "(0-").split("(?<=\\+|-|\\*|/|\\(|\\))|(?=\\+|-|\\*|/|\\(|\\))");
-        Stack<String> seq = new Stack<>();
-        Stack<String> sign = new Stack<>();
+        Deque<String> seq = new ArrayDeque<>();
+        Deque<String> sign = new ArrayDeque<>();
         for (String str : strs) {
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/") && !str.equals("(") && !str.equals(")")) {
                 seq.push(str);
@@ -322,14 +318,14 @@ class Solution {
                 continue;
             }
             if (str.equals(")")) {
-                while (!sign.lastElement().equals("(")) {
+                while (!sign.getFirst().equals("(")) {
                     seq.push(sign.pop());
                 }
                 sign.pop();
                 continue;
             }
             while (!sign.isEmpty()) {
-                if (!prior(str, sign.lastElement())) {
+                if (!prior(str, sign.getFirst())) {
                     seq.push(sign.pop());
                     continue;
                 }
@@ -340,14 +336,15 @@ class Solution {
         while (!sign.isEmpty()) {
             seq.push(sign.pop());
         }
-        Stack<Integer> st = new Stack<>();
-        for (String str : seq) {
+        Deque<Integer> d = new ArrayDeque<>();
+        while (!seq.isEmpty()) {
+            String str = seq.pollLast();
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
-                st.push(Integer.parseInt(str));
+                d.push(Integer.parseInt(str));
                 continue;
             }
-            int i1 = st.pop();
-            int i2 = st.pop();
+            int i1 = d.pop();
+            int i2 = d.pop();
             int i3;
             if (str.equals("+")) {
                 i3 = i2 + i1;
@@ -358,9 +355,9 @@ class Solution {
             } else {  // str.equals("/")
                 i3 = i2 / i1;
             }
-            st.push(i3);
+            d.push(i3);
         }
-        return st.get(0);
+        return d.pop();
     }
 
     boolean prior(String s1, String s2) {
@@ -384,8 +381,7 @@ class Solution {
 
 ## 227. 基本计算器 II
 
-![](D:\Notes\Leetcode\Leetcode.assets\227-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\227-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\227.png)
 
 我的AC代码（Java）：
 
@@ -393,15 +389,15 @@ class Solution {
 class Solution {
     public int calculate(String s) {
         String[] strs = s.replace(" ", "").split("(?<=\\+|-|\\*|/)|(?=\\+|-|\\*|/)");
-        Stack<String> seq = new Stack<>();
-        Stack<String> sign = new Stack<>();
+        Deque<String> seq = new ArrayDeque<>();
+        Deque<String> sign = new ArrayDeque<>();
         for (String str : strs) {
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
                 seq.push(str);
                 continue;
             }
             while (!sign.isEmpty()) {
-                if (!prior(str, sign.lastElement())) {
+                if (!prior(str, sign.getFirst())) {
                     seq.push(sign.pop());
                     continue;
                 }
@@ -412,14 +408,15 @@ class Solution {
         while (!sign.isEmpty()) {
             seq.push(sign.pop());
         }
-        Stack<Integer> st = new Stack<>();
-        for (String str : seq) {
+        Deque<Integer> d = new ArrayDeque<>();
+        while (!seq.isEmpty()) {
+            String str = seq.pollLast();
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
-                st.push(Integer.parseInt(str));
+                d.push(Integer.parseInt(str));
                 continue;
             }
-            int i1 = st.pop();
-            int i2 = st.pop();
+            int i1 = d.pop();
+            int i2 = d.pop();
             int i3;
             if (str.equals("+")) {
                 i3 = i2 + i1;
@@ -430,9 +427,9 @@ class Solution {
             } else {  // str.equals("/")
                 i3 = i2 / i1;
             }
-            st.push(i3);
+            d.push(i3);
         }
-        return st.get(0);
+        return d.pop();
     }
 
     boolean prior(String s1, String s2) {
@@ -454,10 +451,7 @@ class Solution {
 
 ## 636. 函数的独占时间
 
-![](D:\Notes\Leetcode\Leetcode.assets\636-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\636-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\636-3.png)
-![](D:\Notes\Leetcode\Leetcode.assets\636-4.png)
+![](D:\Notes\Leetcode\Leetcode.assets\636.png)
 
 我的AC代码（Java）：
 
@@ -467,24 +461,24 @@ class Solution {
 
     public int[] exclusiveTime(int n, List<String> logs) {
         total = new int[n];
-        Stack<Function> s = new Stack<>();
+        Deque<Function> d = new ArrayDeque<>();
         for (String log : logs) {
             String[] strs = log.split(":");
             int id = Integer.parseInt(strs[0]);
             String status = strs[1];
             int timestamp = Integer.parseInt(strs[2]);
             if (status.equals("start")) {
-                if (!s.empty()) {
-                    s.lastElement().sum += timestamp - s.lastElement().timestamp;
-                    s.lastElement().timestamp = timestamp;
+                if (!d.isEmpty()) {
+                    d.getFirst().sum += timestamp - d.getFirst().timestamp;
+                    d.getFirst().timestamp = timestamp;
                 }
-                s.push(new Function(id, timestamp, 0));
+                d.push(new Function(id, timestamp, 0));
             } else {  // status.equals("end")
-                Function f = s.pop();
+                Function f = d.pop();
                 f.sum += timestamp - f.timestamp + 1;
                 total[f.id] += f.sum;
-                if (!s.empty()) {
-                    s.lastElement().timestamp = timestamp + 1;
+                if (!d.isEmpty()) {
+                    d.getFirst().timestamp = timestamp + 1;
                 }
             }
         }
@@ -509,8 +503,7 @@ class Function {
 
 ## 735. 行星碰撞
 
-![](D:\Notes\Leetcode\Leetcode.assets\735-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\735-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\735.png)
 
 相关题解：
 [行星碰撞](https://leetcode-cn.com/problems/asteroid-collision/solution/xing-xing-peng-zhuang-by-leetcode/)
@@ -608,35 +601,37 @@ public:
 ```java
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
-        Stack<Integer> s = new Stack<>();
+        Deque<Integer> d = new ArrayDeque<>();
         for (int a : asteroids) {
-            if (s.empty()) {
-                s.push(a);
+            if (d.isEmpty()) {
+                d.push(a);
                 continue;
             }
             boolean flag = true;
-            while (!s.empty()) {
-                int i = s.lastElement();
+            while (!d.isEmpty()) {
+                int i = d.getFirst();
                 if ((i > 0 && a > 0) || i < 0) {
                     break;
                 } else if (i > -a) {  // i > 0 && a < 0
                     flag = false;
                     break;
                 } else if (i == -a) {
-                    s.pop();
+                    d.pop();
                     flag = false;
                     break;
                 } else {  // i < -a
-                    s.pop();
+                    d.pop();
                 }
             }
             if (flag) {
-                s.push(a);
+                d.push(a);
             }
         }
-        int[] res = new int[s.size()];
-        for (int i = 0; i < res.length; i++) {
-            res[i] = s.get(i);
+        int len = d.size();
+        int[] res = new int[len];
+        Object[] arr = d.toArray();
+        for (int i = 0; i < len; i++) {
+            res[i] = (Integer) arr[len - i - 1];
         }
         return res;
     }
@@ -647,8 +642,7 @@ class Solution {
 
 ## 772. 基本计算器 III
 
-![](D:\Notes\Leetcode\Leetcode.assets\772-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\772-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\772.png)
 
 我的AC代码（Java）：
 
@@ -659,8 +653,8 @@ class Solution {
             s = "0" + s;
         }
         String[] strs = s.replace(" ", "").replace("(-", "(0-").split("(?<=\\+|-|\\*|/|\\(|\\))|(?=\\+|-|\\*|/|\\(|\\))");
-        Stack<String> seq = new Stack<>();
-        Stack<String> sign = new Stack<>();
+        Deque<String> seq = new ArrayDeque<>();
+        Deque<String> sign = new ArrayDeque<>();
         for (String str : strs) {
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/") && !str.equals("(") && !str.equals(")")) {
                 seq.push(str);
@@ -671,14 +665,14 @@ class Solution {
                 continue;
             }
             if (str.equals(")")) {
-                while (!sign.lastElement().equals("(")) {
+                while (!sign.getFirst().equals("(")) {
                     seq.push(sign.pop());
                 }
                 sign.pop();
                 continue;
             }
             while (!sign.isEmpty()) {
-                if (!prior(str, sign.lastElement())) {
+                if (!prior(str, sign.getFirst())) {
                     seq.push(sign.pop());
                     continue;
                 }
@@ -689,14 +683,15 @@ class Solution {
         while (!sign.isEmpty()) {
             seq.push(sign.pop());
         }
-        Stack<Integer> st = new Stack<>();
-        for (String str : seq) {
+        Deque<Integer> d = new ArrayDeque<>();
+        while (!seq.isEmpty()) {
+            String str = seq.pollLast();
             if (!str.equals("+") && !str.equals("-") && !str.equals("*") && !str.equals("/")) {
-                st.push(Integer.parseInt(str));
+                d.push(Integer.parseInt(str));
                 continue;
             }
-            int i1 = st.pop();
-            int i2 = st.pop();
+            int i1 = d.pop();
+            int i2 = d.pop();
             int i3;
             if (str.equals("+")) {
                 i3 = i2 + i1;
@@ -707,9 +702,9 @@ class Solution {
             } else {  // str.equals("/")
                 i3 = i2 / i1;
             }
-            st.push(i3);
+            d.push(i3);
         }
-        return st.get(0);
+        return d.pop();
     }
 
     boolean prior(String s1, String s2) {

@@ -31,8 +31,7 @@ void backtrack(参数) {
 
 ## 17.电话号码的字母组合
 
-![](D:\Notes\Leetcode\Leetcode.assets\17-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\17-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\17.png)
 
 我的AC代码（C++）：
 
@@ -112,10 +111,7 @@ public:
 
 ## 37. 解数独
 
-![](D:\Notes\Leetcode\Leetcode.assets\37-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\37-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\37-3.png)
-![](D:\Notes\Leetcode\Leetcode.assets\37-4.png)
+![](D:\Notes\Leetcode\Leetcode.assets\37.png)
 
 相关视频：
 [【算法演示】回溯法求解数独，leetcode37题](https://www.bilibili.com/video/BV16U4y1E72g)
@@ -221,8 +217,7 @@ public:
 
 ## 39. 组合总和
 
-![](D:\Notes\Leetcode\Leetcode.assets\39-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\39-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\39.png)
 
 相关视频：
 [带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！](https://www.bilibili.com/video/BV1KT4y1M7HJ)
@@ -265,8 +260,7 @@ public:
 
 ## 77. 组合
 
-![](D:\Notes\Leetcode\Leetcode.assets\77-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\77-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\77.png)
 
 相关视频：
 [带你学透回溯算法-组合问题（对应力扣题目：77.组合）| 回溯法精讲！](https://www.bilibili.com/video/BV1ti4y1L7cv)

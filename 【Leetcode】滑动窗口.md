@@ -8,8 +8,7 @@
 
 ## 3. 无重复字符的最长子串
 
-![](D:\Notes\Leetcode\Leetcode.assets\3-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\3-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\3.png)
 
 相关视频：
 [力扣套路1：滑动窗口](https://www.bilibili.com/video/BV1GZ4y1N7Yu)
@@ -90,10 +89,39 @@ class Solution {
 
 
 
+## 28. 找出字符串中第一个匹配项的下标
+
+![](D:\Notes\Leetcode\Leetcode.assets\28.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int strStr(String haystack, String needle) {
+        char[] arr1 = haystack.toCharArray();
+        char[] arr2 = needle.toCharArray();
+        for (int i = 0; i <= arr1.length - arr2.length; i++) {
+            boolean flag = true;
+            for (int j = 0; j < arr2.length; j++) {
+                if (arr1[i + j] != arr2[j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+```
+
+
+
 ## 209. 长度最小的子数组
 
-![](D:\Notes\Leetcode\Leetcode.assets\209-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\209-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\209.png)
 
 相关视频：
 [LeetCode每日打卡.209.长度最小的子数组](https://www.bilibili.com/video/BV1UA411i77h)
@@ -178,8 +206,7 @@ class Solution {
 
 ## 220. 存在重复元素 III
 
-![](D:\Notes\Leetcode\Leetcode.assets\220-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\220-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\220.png)
 
 我的AC代码（Java）：
 

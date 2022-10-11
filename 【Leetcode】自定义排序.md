@@ -8,9 +8,7 @@
 
 ## 1366. 通过投票对团队排名
 
-![](D:\Notes\Leetcode\Leetcode.assets\1366-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1366-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1366-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1366.png)
 
 我的AC代码（Java）：
 
@@ -65,8 +63,7 @@ class Team {
 
 ## 1387. 将整数按权重排序
 
-![](D:\Notes\Leetcode\Leetcode.assets\1387-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1387-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1387.png)
 
 我的AC代码（Java）：
 
@@ -119,8 +116,7 @@ class Int {
 
 ## 1451. 重新排列句子中的单词
 
-![](D:\Notes\Leetcode\Leetcode.assets\1451-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1451-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1451.png)
 
 我的AC代码（Java，解法1）：
 

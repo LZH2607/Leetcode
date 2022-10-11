@@ -23,8 +23,7 @@ struct TreeNode {
 
 ## 94. 二叉树的中序遍历
 
-![](D:\Notes\Leetcode\Leetcode.assets\94-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\94-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\94.png)
 
 相关视频：
 [数据结构-浙江大学](https://www.bilibili.com/video/BV1JW411i731)
@@ -80,9 +79,7 @@ public:
 
 ## 100. 相同的树
 
-![](D:\Notes\Leetcode\Leetcode.assets\100-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\100-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\100-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\100.png)
 
 相关视频：
 [LeetCode 100. 相同的树](https://www.bilibili.com/video/BV19m4y1976i)
@@ -160,9 +157,7 @@ public:
 
 ## 101. 对称二叉树
 
-![](D:\Notes\Leetcode\Leetcode.assets\101-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\101-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\101-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\101.png)
 
 我的AC代码（C++，解法1，递归算法）：
 
@@ -361,8 +356,7 @@ public:
 
 ## 102. 二叉树的层序遍历
 
-![](D:\Notes\Leetcode\Leetcode.assets\102-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\102-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\102.png)
 
 我的AC代码：
 
@@ -374,8 +368,7 @@ public:
 
 ## 105. 从前序与中序遍历序列构造二叉树
 
-![](D:\Notes\Leetcode\Leetcode.assets\105-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\105-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\105.png)
 
 我的AC代码（C++）：
 
@@ -424,8 +417,7 @@ public:
 
 ## 106. 从中序与后序遍历序列构造二叉树
 
-![](D:\Notes\Leetcode\Leetcode.assets\106-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\106-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\106.png)
 
 我的AC代码（C++）：
 
@@ -474,9 +466,7 @@ public:
 
 ## 144. 二叉树的前序遍历
 
-![](D:\Notes\Leetcode\Leetcode.assets\144-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\144-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\144-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\144.png)
 
 我的AC代码（C++，递归方法）：
 
@@ -530,8 +520,7 @@ public:
 
 ## 145. 二叉树的后序遍历
 
-![](D:\Notes\Leetcode\Leetcode.assets\145-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\145-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\145.png)
 
 我的AC代码（C++，递归算法）：
 

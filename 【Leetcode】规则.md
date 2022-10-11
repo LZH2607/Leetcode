@@ -85,9 +85,7 @@ class Solution {
 
 ## 36. 有效的数独
 
-![](D:\Notes\Leetcode\Leetcode.assets\36-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\36-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\36-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\36.png)
 
 我的AC代码（C++）：
 
@@ -282,8 +280,7 @@ class Solution {
 
 ## 1545. 找出第 N 个二进制字符串中的第 K 位
 
-![](D:\Notes\Leetcode\Leetcode.assets\1545-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1545-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1545.png)
 
 我的AC代码（Java）：
 
@@ -320,8 +317,7 @@ class Solution {
 
 ## 1701. 平均等待时间
 
-![](D:\Notes\Leetcode\Leetcode.assets\1701-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1701-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1701.png)
 
 我的AC代码（Java）：
 

@@ -6,11 +6,18 @@
 
 
 
+相关文章：
+[算法一招鲜——双指针问题](https://zhuanlan.zhihu.com/p/71643340)
+
+双指针：
+	对撞指针
+	快慢指针
+
+
+
 ## 11. 盛最多水的容器
 
-![](D:\Notes\Leetcode\Leetcode.assets\11-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\11-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\11-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\11.png)
 
 相关视频：
 [五分钟力扣 Leetcode 第11题 盛最多水的容器  Python入门算法刷题 解法 80%](https://www.bilibili.com/video/BV1uc411h7XA)
@@ -73,8 +80,7 @@ class Solution {
 
 ## 15. 三数之和
 
-![](D:\Notes\Leetcode\Leetcode.assets\15-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\15-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\15.png)
 
 相关视频：
 [三数之和题目解析](https://www.bilibili.com/video/BV1kU4y1a7Pj)
@@ -302,8 +308,7 @@ class Solution {
 
 ## 18. 四数之和
 
-![](D:\Notes\Leetcode\Leetcode.assets\18-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\18-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\18.png)
 
 相关视频：
 [【忍者算法】LeetCode 18 四数之和](https://www.bilibili.com/video/BV1r341147JQ)
@@ -436,10 +441,74 @@ class Solution {
 
 
 
+## 26. 删除有序数组中的重复项
+
+![](D:\Notes\Leetcode\Leetcode.assets\26.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int cnt = 1;
+        int len = nums.length;
+        if (len < 2) {
+            cnt = len;
+            return cnt;
+        }
+        int l_idx = 0;
+        int r_idx = 1;
+        while (r_idx < len) {
+            if (nums[l_idx] != nums[r_idx]) {
+                l_idx++;
+                nums[l_idx] = nums[r_idx];
+                cnt++;
+            }
+            r_idx++;
+        }
+        return cnt;
+    }
+}
+```
+
+
+
+## 27. 移除元素
+
+![](D:\Notes\Leetcode\Leetcode.assets\27.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int cnt = 0;
+        int len = nums.length;
+        if (len == 0) {
+            return cnt;
+        } else if (len == 1) {
+            return nums[0] == val ? cnt : ++cnt;
+        }
+        int l_idx = 0;
+        int r_idx = 0;
+        while (r_idx < len) {
+            if (nums[r_idx] != val) {
+                nums[l_idx] = nums[r_idx];
+                l_idx++;
+                cnt++;
+            }
+            r_idx++;
+        }
+        return cnt;
+    }
+}
+```
+
+
+
 ## 167. 两数之和 II - 输入有序数组
 
-![](D:\Notes\Leetcode\Leetcode.assets\167-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\167-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\167.png)
 
 我的AC代码（Java）：
 

@@ -8,8 +8,7 @@
 
 ## 1. 两数之和
 
-![](D:\Notes\Leetcode\Leetcode.assets\1-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\1-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\1.png)
 
 相关视频：
 [二数之和题解分析](https://www.bilibili.com/video/BV1hV411e7MW)
@@ -66,9 +65,7 @@ class Solution {
 
 ## 12. 整数转罗马数字
 
-![](D:\Notes\Leetcode\Leetcode.assets\12-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\12-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\12-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\12.png)
 
 相关视频：
 [你真的识数么？一起认识罗马数字](https://www.bilibili.com/video/BV19541157Pm)
@@ -189,9 +186,7 @@ class Solution {
 
 ## 13. 罗马数字转整数
 
-![](D:\Notes\Leetcode\Leetcode.assets\13-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\13-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\13-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\13.png)
 
 我的AC代码（C++）：
 
@@ -318,8 +313,7 @@ class Solution {
 
 ## 49. 字母异位词分组
 
-![](D:\Notes\Leetcode\Leetcode.assets\49-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\49-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\49.png)
 
 我的AC代码（C++）：
 
@@ -496,10 +490,10 @@ class Solution {
 
 ## 187. 重复的DNA序列
 
+![](D:\Notes\Leetcode\Leetcode.assets\187.png)
+
 相关视频：
 [Leetcode刷题187. 重复的DNA序列 Repeated DNA Sequences](https://www.bilibili.com/video/BV1PQ4y1P7se)
-
-![](D:\Notes\Leetcode\Leetcode.assets\187.png)
 
 我的AC代码（C++）：
 
@@ -583,8 +577,7 @@ class Solution {
 
 ## 219. 存在重复元素 II
 
-![](D:\Notes\Leetcode\Leetcode.assets\219-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\219-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\219.png)
 
 我的AC代码（C++）：
 

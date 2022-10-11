@@ -8,8 +8,7 @@
 
 ## 58. 最后一个单词的长度
 
-![](D:\Notes\Leetcode\Leetcode.assets\58-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\58-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\58.png)
 
 我的AC代码（Java）：
 
@@ -27,8 +26,7 @@ class Solution {
 
 ## 125. 验证回文串
 
-![](D:\Notes\Leetcode\Leetcode.assets\125-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\125-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\125.png)
 
 我的AC代码（Java）：
 
@@ -50,8 +48,7 @@ class Solution {
 
 ## 151. 反转字符串中的单词
 
-![](D:\Notes\Leetcode\Leetcode.assets\151-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\151-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\151.png)
 
 我的AC代码（Java）：
 

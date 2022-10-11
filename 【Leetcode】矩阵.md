@@ -6,10 +6,58 @@
 
 
 
+## 6. Z 字形变换
+
+![](D:\Notes\Leetcode\Leetcode.assets\6.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String convert(String s, int numRows) {
+        if (numRows == 1) {
+            return s;
+        }
+        int numCols = s.length();
+        char[][] mat = new char[numRows][numCols];
+        char[] arr = s.toCharArray();
+        boolean down = true;
+        int i = 0;
+        int j = 0;
+        for (char c : arr) {
+            mat[i][j] = c;
+            if (down && i < numRows - 1) {
+                i++;
+            } else if (down && i == numRows - 1) {
+                down = false;
+                i--;
+                j++;
+            } else if (!down & i > 0) {
+                i--;
+                j++;
+            } else {  // !down & i == 0
+                down = true;
+                i++;
+            }
+        }
+        String res = "";
+        for (i = 0; i < mat.length; i++) {
+            for (j = 0; j < mat[i].length; j++) {
+                if (mat[i][j] != 0) {
+                    res = res + mat[i][j];
+                }
+            }
+        }
+        return res;
+    }
+}
+```
+
+
+
 ## 48. 旋转图像
 
-![](D:\Notes\Leetcode\Leetcode.assets\48-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\48-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\48.png)
 
 相关视频：
 [五分钟力扣 Leetcode 第48题 旋转图像 清晰易懂 例子阐述 时间67%](https://www.bilibili.com/video/BV1Ct4y1C7zf)
@@ -39,8 +87,7 @@ public:
 
 ## 54. 螺旋矩阵
 
-![](D:\Notes\Leetcode\Leetcode.assets\54-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\54-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\54.png)
 
 我的AC代码（C++）：
 
@@ -133,8 +180,7 @@ public:
 
 ## 59. 螺旋矩阵 II
 
-![](D:\Notes\Leetcode\Leetcode.assets\59-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\59-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\59.png)
 
 我的AC代码（C++）：
 
@@ -235,9 +281,7 @@ public:
 
 ## 73. 矩阵置零
 
-![](D:\Notes\Leetcode\Leetcode.assets\73-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\73-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\73-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\73.png)
 
 相关视频：
 [【LeetCode 每日一题】73. 矩阵置零 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1jL411w7ar)

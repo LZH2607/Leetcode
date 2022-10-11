@@ -62,8 +62,7 @@ public:
 
 ## 32. 最长有效括号
 
-![](D:\Notes\Leetcode\Leetcode.assets\32-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\32-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\32.png)
 
 相关视频：
 [[LeetCode]. 32 最长有效括号(7分) [动态规划系列]](https://www.bilibili.com/video/BV1VE411t75D)
@@ -106,9 +105,7 @@ public:
 
 ## 62. 不同路径
 
-![](D:\Notes\Leetcode\Leetcode.assets\62-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\62-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\62-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\62.png)
 
 相关视频：
 [力扣 Leetcode 62.  不同路径 Python算法 Leetcode 算法刷题 第62题 例子阐述 时间74% 极简代码 两种解法 清晰易懂 极简](https://www.bilibili.com/video/BV1zp4y1i7Zz?spm_id_from=333.851.header_right.history_list.click)
@@ -140,9 +137,7 @@ public:
 
 ## 63. 不同路径 II
 
-![](D:\Notes\Leetcode\Leetcode.assets\63-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\63-2.png)
-![](D:\Notes\Leetcode\Leetcode.assets\63-3.png)
+![](D:\Notes\Leetcode\Leetcode.assets\63.png)
 
 相关视频：
 [力扣 Leetcode 63.  不同路径II Python算法 Leetcode 算法刷题 第63题 例子阐述 时间58% 极简代码 思路清晰易懂](https://www.bilibili.com/video/BV1gz4y1Q7Yu)

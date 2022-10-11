@@ -22,8 +22,7 @@ public class ListNode {
 
 ## 2. 两数相加
 
-![](D:\Notes\Leetcode\Leetcode.assets\2-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\2-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\2.png)
 
 我的AC代码（Java）：
 
@@ -75,8 +74,7 @@ class Solution {
 
 ## 19. 删除链表的倒数第 N 个结点
 
-![](D:\Notes\Leetcode\Leetcode.assets\19-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\19-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\19.png)
 
 我的AC代码（Java，解法1，两趟遍历）：
 
@@ -130,8 +128,7 @@ class Solution {
 
 ## 21. 合并两个有序链表
 
-![](D:\Notes\Leetcode\Leetcode.assets\21-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\21-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\21.png)
 
 我的AC代码（Java）：
 
@@ -171,8 +168,7 @@ class Solution {
 
 ## 23. 合并K个升序链表
 
-![](D:\Notes\Leetcode\Leetcode.assets\23-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\23-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\23.png)
 
 我的AC代码（Java）：
 
@@ -227,8 +223,7 @@ class Solution {
 
 ## 24. 两两交换链表中的节点
 
-![](D:\Notes\Leetcode\Leetcode.assets\24-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\24-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\24.png)
 
 我的AC代码（Java）：
 
@@ -259,8 +254,7 @@ class Solution {
 
 ## 25. K 个一组翻转链表
 
-![](D:\Notes\Leetcode\Leetcode.assets\25-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\25-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\25.png)
 
 我的AC代码（Java）：
 
@@ -306,8 +300,7 @@ class Solution {
 
 ## 61. 旋转链表
 
-![](D:\Notes\Leetcode\Leetcode.assets\61-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\61-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\61.png)
 
 我的AC代码（Java）：
 

@@ -8,8 +8,7 @@
 
 ## 50. Pow(x, n)
 
-![](D:\Notes\Leetcode\Leetcode.assets\50-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\50-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\50.png)
 
 相关视频：
 [5-7 「力扣」第 50 题：快速幂](https://www.bilibili.com/video/BV1HU4y1o7cN)
@@ -44,15 +43,14 @@ public:
 
 ## 372. 超级次方
 
-![](D:\Notes\Leetcode\Leetcode.assets\372-1.png)
-![](D:\Notes\Leetcode\Leetcode.assets\372-2.png)
+![](D:\Notes\Leetcode\Leetcode.assets\372.png)
 
 相关视频：
 [每日一题｜Leetcode 372. 超级次方｜快速幂｜C++](https://www.bilibili.com/video/BV1AF411z7QK)
 
 模运算性质的证明：
 
-![](D:\Notes\Leetcode\Leetcode.assets\372-3.PNG)
+![](D:\Notes\Leetcode\Leetcode.assets\372-proof.PNG)
 
 我的AC代码（C++）：
 
