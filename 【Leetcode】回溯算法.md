@@ -258,6 +258,93 @@ public:
 
 
 
+## 46. 全排列
+
+![](D:\Notes\Leetcode\Leetcode.assets\46.png)
+
+相关视频：
+[Leetcode力扣46 手画图解版｜全排列 Permutation](https://www.bilibili.com/video/BV1up4y1s7yB/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int len;
+    boolean[] visit;
+    List<List<Integer>> ll;
+
+    public List<List<Integer>> permute(int[] nums) {
+        len = nums.length;
+        visit = new boolean[len];
+        ll = new ArrayList<>();
+        Deque<Integer> d = new ArrayDeque<>();
+        backtrack(d, nums);
+        return ll;
+    }
+
+    void backtrack(Deque<Integer> d, int[] nums) {
+        if (d.size() == len) {
+            List<Integer> l = new ArrayList<>(d);
+            ll.add(l);
+            return;
+        }
+        for (int i = 0; i < len; i++) {
+            if (!visit[i]) {
+                d.push(nums[i]);
+                visit[i] = true;
+                backtrack(d, nums);
+                d.pop();
+                visit[i] = false;
+            }
+        }
+    }
+}
+```
+
+
+
+## 47. 全排列 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\47.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int len;
+    boolean[] visit;
+    Set<List<Integer>> s;
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        len = nums.length;
+        visit = new boolean[len];
+        s = new HashSet<>();
+        Deque<Integer> d = new ArrayDeque<>();
+        backtrack(d, nums);
+        return new ArrayList<>(s);
+    }
+
+    void backtrack(Deque<Integer> d, int[] nums) {
+        if (d.size() == len) {
+            List<Integer> l = new ArrayList<>(d);
+            s.add(l);
+            return;
+        }
+        for (int i = 0; i < len; i++) {
+            if (!visit[i]) {
+                visit[i] = true;
+                d.push(nums[i]);
+                backtrack(d, nums);
+                d.pop();
+                visit[i] = false;
+            }
+        }
+    }
+}
+```
+
+
+
 ## 77. 组合
 
 ![](D:\Notes\Leetcode\Leetcode.assets\77.png)

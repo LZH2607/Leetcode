@@ -6,6 +6,38 @@
 
 
 
+## 38. 外观数列
+
+![](D:\Notes\Leetcode\Leetcode.assets\38.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String countAndSay(int n) {
+        if (n == 1) {
+            return "1";
+        }
+        char[] arr = countAndSay(n - 1).toCharArray();
+        String res = "";
+        char ch = arr[0];
+        int cnt = 0;
+        for (char c : arr) {
+            if (c == ch) {
+                cnt++;
+                continue;
+            }
+            res = res + cnt + ch;
+            ch = c;
+            cnt = 1;
+        }
+        return res + cnt + ch;
+    }
+}
+```
+
+
+
 ## 1545. 找出第 N 个二进制字符串中的第 K 位
 
 ![](D:\Notes\Leetcode\Leetcode.assets\1545.png)

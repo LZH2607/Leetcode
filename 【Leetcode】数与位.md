@@ -290,6 +290,177 @@ class Solution {
 
 
 
+## 29. 两数相除
+
+![](D:\Notes\Leetcode\Leetcode.assets\29.png)
+
+相关视频：
+[五分钟力扣 Leetcode 第29题 两数相除 Python入门算法刷题 极简解法 13行代码 67% 位移操作](https://www.bilibili.com/video/BV1SQ4y1K7z5/)
+
+我的AC代码（Java）:
+
+```java
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if (divisor == 0) {
+            return Integer.MAX_VALUE;
+        }
+        boolean neg = false;
+        boolean flag = false;
+        if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
+            neg = true;
+        }
+        if (dividend == Integer.MIN_VALUE) {
+            if (divisor == -1) {
+                return Integer.MAX_VALUE;
+            } else if (divisor == Integer.MIN_VALUE) {
+                return 1;
+            } else {
+                flag = true;
+                dividend++;
+            }
+        } else if (divisor == Integer.MIN_VALUE) {  // dividend != Integer.MIN_VALUE
+            return 0;
+        }
+        if (dividend < 0) {
+            dividend = get2sComplement(dividend);
+        }
+        if (divisor < 0) {
+            divisor = get2sComplement(divisor);
+        }
+        int res = 0;
+        while (dividend >= divisor) {
+            int i = getI(dividend, divisor);
+            dividend -= divisor << i;
+            res += 1 << i;
+        }
+        if (flag && (dividend + 1) >= divisor) {
+            res++;
+        }
+        if (neg) {
+            res = get2sComplement(res);
+        }
+        return res;
+    }
+
+    int get2sComplement(int i) {
+        return ~i + 1;
+    }
+
+    int getI(int dividend, int divisor) {
+        int i = 0;
+        while ((dividend >> 1) > divisor) {
+            i++;
+            dividend >>= 1;
+        }
+        return i;
+    }
+}
+```
+
+
+
+## 43. 字符串相乘
+
+![](D:\Notes\Leetcode\Leetcode.assets\43.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    String[] mul;
+
+    public String multiply(String num1, String num2) {
+        if (compare(num1, num2) == -1) {
+            String temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+        init(num1);
+        int len = num2.length();
+        num2 = new StringBuffer(num2).reverse().toString();
+        String res = "";
+        String zeros = "";
+        for (int i = 0; i < len; i++) {
+            res = add(mul[Integer.parseInt(num2.substring(i, i + 1))] + zeros, res);
+            zeros += "0";
+        }
+        return res;
+    }
+
+    void init(String num) {
+        mul = new String[10];
+        mul[0] = "0";
+        for (int i = 1; i < 10; i++) {
+            mul[i] = add(mul[i - 1], num);
+        }
+    }
+
+    int compare(String num1, String num2) {
+        int len1 = num1.length();
+        int len2 = num2.length();
+        if (len1 > len2) {
+            return 1;
+        } else if (len1 < len2) {
+            return -1;
+        }
+        // len1 == len2
+        for (int i = 0; i < len1; i++) {
+            int d1 = Integer.parseInt(num1.substring(i, i + 1));
+            int d2 = Integer.parseInt(num2.substring(i, i + 1));
+            if (d1 > d2) {
+                return 1;
+            } else if (d1 < d2) {
+                return -1;
+            }
+            // d1 == d2
+        }
+        return 0;
+    }
+
+    String add(String num1, String num2) {
+        num1 = new StringBuffer(num1).reverse().toString();
+        num2 = new StringBuffer(num2).reverse().toString();
+        int len1 = num1.length();
+        int len2 = num2.length();
+        Deque<Integer> seq = new ArrayDeque<>();
+        int c = 0;
+        int i = 0;
+        while (i < len1 && i < len2) {
+            int s = Integer.parseInt(num1.substring(i, i + 1)) + Integer.parseInt(num2.substring(i, i + 1)) + c;
+            int d = s % 10;
+            c = s / 10;
+            seq.push(d);
+            i++;
+        }
+        while (i < len1) {
+            int s = Integer.parseInt(num1.substring(i, i + 1)) + c;
+            int d = s % 10;
+            c = s / 10;
+            seq.push(d);
+            i++;
+        }
+        while (i < len2) {
+            int s = Integer.parseInt(num2.substring(i, i + 1)) + c;
+            int d = s % 10;
+            c = s / 10;
+            seq.push(d);
+            i++;
+        }
+        if (c > 0) {
+            seq.push(c);
+        }
+        String res = "";
+        while (!seq.isEmpty()) {
+            res += seq.pollFirst();
+        }
+        return res;
+    }
+}
+```
+
+
+
 ## 393. UTF-8 编码验证
 
 ![](D:\Notes\Leetcode\Leetcode.assets\393.png)
