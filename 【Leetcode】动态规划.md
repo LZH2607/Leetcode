@@ -6,7 +6,7 @@
 
 
 
-## 5.最长回文子串
+## 5.最长回文子串（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\5.png)
 
@@ -60,7 +60,7 @@ public:
 
 
 
-## 32. 最长有效括号
+## 32. 最长有效括号（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\32.png)
 
@@ -103,7 +103,39 @@ public:
 
 
 
-## 62. 不同路径
+## 53. 最大子数组和（Java）
+
+![](D:\Notes\Leetcode\Leetcode.assets\53.png)
+
+相关视频：
+[【LeetCode 每日一题】53. 最大子数组和 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV19u411X7TC/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int len = nums.length;
+        int sum = Integer.MIN_VALUE;
+        int maxSum = sum;
+        for (int i = 0; i < len; i++) {
+            if (sum > 0) {
+                sum += nums[i];
+            } else {  // sum <= 0
+                sum = nums[i];
+            }
+            if (sum > maxSum) {
+                maxSum = sum;
+            }
+        }
+        return maxSum;
+    }
+}
+```
+
+
+
+## 62. 不同路径（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\62.png)
 
@@ -135,7 +167,7 @@ public:
 
 
 
-## 63. 不同路径 II
+## 63. 不同路径 II（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\63.png)
 
@@ -187,5 +219,40 @@ public:
 		return dp[m - 1][n - 1];
 	}
 };
+```
+
+
+
+## 300. 最长递增子序列（Java）
+
+![](D:\Notes\Leetcode\Leetcode.assets\300.png)
+
+相关视频：
+[10分钟彻底搞懂“动态规划”算法](https://www.bilibili.com/video/BV1AB4y1w7eT/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int len = nums.length;
+        int[] dp = new int[len];
+        Arrays.fill(dp, 1);
+        int maxLen = 1;
+        for (int i = len - 2; i >= 0; i--) {
+            for (int j = i + 1; j < len; j++) {
+                if (nums[i] < nums[j]) {
+                    if (dp[i] < dp[j] + 1) {
+                        dp[i] = dp[j] + 1;
+                        if (dp[i] > maxLen) {
+                            maxLen = dp[i];
+                        }
+                    }
+                }
+            }
+        }
+        return maxLen;
+    }
+}
 ```
 

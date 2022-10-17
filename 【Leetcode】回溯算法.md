@@ -13,14 +13,28 @@
 
 代码模板：
 
-```c++
+```java
 void backtrack(参数) {
     if (终止条件) {
         保存结果;
         return;
     }
-    for (循环条件) {
-        栈.push(新参数);
+    for (新参数) {
+        处理(参数);
+        backtrack(新参数);
+        撤销处理(参数);
+    }
+}
+```
+
+```java
+void backtrack(参数) {
+    if (终止条件) {
+        保存结果;
+        return;
+    }
+    for (新参数) {
+        栈.push(参数);
         backtrack(新参数);
         栈.pop();
     }
@@ -29,87 +43,131 @@ void backtrack(参数) {
 
 
 
-## 17.电话号码的字母组合
+## 17.电话号码的字母组合（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\17.png)
 
-我的AC代码（C++）：
-
-```c++
+```java
 class Solution {
-public:
-	vector<string> v;
-	int len;
-	unordered_map<char, string> m;
-	vector<string> letterCombinations(string digits) {
-		m['2'] = "abc";
-		m['3'] = "def";
-		m['4'] = "ghi";
-		m['5'] = "jkl";
-		m['6'] = "mno";
-		m['7'] = "pqrs";
-		m['8'] = "tuv";
-		m['9'] = "wxyz";
-		len = digits.size();
-		if (len != 0) {
-			backtrack(digits, "");
-		}
-		return v;
-	}
-	void backtrack(string digits, string s) {
-		if (s.size() == len) {
-			v.push_back(s);
-			return;
-		}
-		string ch = m[digits[s.size()]];
-		for (int i = 0; i < ch.size(); i++) {
-			backtrack(digits, s + ch[i]);
-		}
-	}
-};
+    List<String> l;
+    Map<Character, List<String>> m;
+    char[] digits;
+    int len;
+    Deque<String> d;
+
+    public List<String> letterCombinations(String digits) {
+        init(digits);
+        if (len > 0) {
+            backtrack(0);
+        }
+        return l;
+    }
+
+    void init(String digits) {
+        l = new ArrayList<>();
+        m = new HashMap<>();
+        m.put('2', Arrays.asList("a", "b", "c"));
+        m.put('3', Arrays.asList("d", "e", "f"));
+        m.put('4', Arrays.asList("g", "h", "i"));
+        m.put('5', Arrays.asList("j", "k", "l"));
+        m.put('6', Arrays.asList("m", "n", "o"));
+        m.put('7', Arrays.asList("p", "q", "r", "s"));
+        m.put('8', Arrays.asList("t", "u", "v"));
+        m.put('9', Arrays.asList("w", "x", "y", "z"));
+        this.digits = digits.toCharArray();
+        len = digits.length();
+        d = new ArrayDeque<>();
+    }
+
+    void backtrack(int i) {
+        if (i == len) {
+            String s = "";
+            Iterator<String> it = d.descendingIterator();
+            while (it.hasNext()) {
+                s += it.next();
+            }
+            l.add(s);
+            return;
+        }
+        for (String s : m.get(digits[i])) {
+            d.push(s);
+            backtrack(i + 1);
+            d.pop();
+        }
+    }
+}
 ```
 
 
 
-## 22.括号生成
+## 22.括号生成（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\22.png)
 
 相关视频：
 [Leetcode 22 括号生成 【递归+剪枝， 也可以回溯】](https://www.bilibili.com/video/BV1x5411j7KN)
 
-我的AC代码（C++）：
+我的AC代码（Java）：
 
-```c++
+```java
 class Solution {
-public:
+    Deque<String> d;
+    int l_cnt;
+    int r_cnt;
     int n;
-    vector<string> s_list;
-    vector<string> generateParenthesis(int n) {
-        this->n = n;
-        backtrack("(", 1, 0);
-        return s_list;
+    List<String> l;
+
+    public List<String> generateParenthesis(int n) {
+        d = new ArrayDeque<>();
+        l_cnt = 0;
+        r_cnt = 0;
+        this.n = n;
+        l = new ArrayList<>();
+        backtrack();
+        return l;
     }
-    void backtrack(string s, int ln, int rn) {
-        if (ln == n) {
-            string res = "";
-            for (int i = 1; i <= n - rn; i++) {
-                res = res + ")";
+
+    void backtrack() {
+        if (l_cnt == n && r_cnt == n) {
+            String s = "";
+            Iterator<String> it = d.descendingIterator();
+            while (it.hasNext()) {
+                s += it.next();
             }
-            s_list.push_back(s + res);
+            l.add(s);
             return;
         }
-        backtrack(s + "(", ln + 1, rn);
-        if (ln > rn) {
-            backtrack(s + ")", ln, rn + 1);
+        if (l_cnt == n && r_cnt < n) {
+            chooseRight();
+        } else if (l_cnt == r_cnt) {  // l_cnt < n
+            chooseLeft();
+        } else {  // l_cnt > r_cnt
+            chooseLeft();
+            chooseRight();
         }
     }
-};
+
+    void chooseLeft() {
+        d.push("(");
+        l_cnt++;
+        backtrack();
+        d.pop();
+        l_cnt--;
+    }
+
+    void chooseRight() {
+        d.push(")");
+        r_cnt++;
+        backtrack();
+        d.pop();
+        r_cnt--;
+    }
+}
 ```
 
 
 
-## 37. 解数独
+## 37. 解数独（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\37.png)
 
@@ -215,50 +273,58 @@ public:
 
 
 
-## 39. 组合总和
+## 39. 组合总和（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\39.png)
 
 相关视频：
 [带你学透回溯算法-组合总和（对应「leetcode」力扣题目：39.组合总和）| 回溯法精讲！](https://www.bilibili.com/video/BV1KT4y1M7HJ)
 
-我的AC代码（C++）：
+我的AC代码（Java）：
 
-```c++
+```java
 class Solution {
-public:
-	vector<vector<int>> vv;
-	vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-		sort(candidates.begin(), candidates.end());
-		vector<int> v;
-		backtrack(candidates, v, target);
-		return vv;
-	}
-	void backtrack(vector<int>& candidates, vector<int>& v, int res) {
-		if (res == 0) {
-			vector<int> t = v;
-			sort(t.begin(), t.end());
-			if (find(vv.begin(), vv.end(), t) == vv.end()) {
-				vv.push_back(t);
-			}
-			return;
-		}
-		int len = candidates.size();
-		for (int i = 0; i < len; i++) {
-			if (candidates[i] <= res) {
-				v.push_back(candidates[i]);
-				backtrack(candidates, v, res - candidates[i]);
-				v.pop_back();
-			}
-		}
-		return;
-	}
-};
+    int[] nums;
+    int sum;
+    int target;
+    Deque<Integer> d;
+    Set<List<Integer>> sl;
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        nums = candidates;
+        Arrays.sort(nums);
+        this.target = target;
+        d = new ArrayDeque<>();
+        sl = new HashSet<>();
+        backtrack();
+        return new ArrayList<>(sl);
+    }
+
+    void backtrack() {
+        if (sum == target) {
+            List<Integer> l = Arrays.asList(d.toArray(new Integer[d.size()]));
+            l.sort(Comparator.naturalOrder());
+            sl.add(l);
+            return;
+        }
+        // sum < target
+        for (int num : nums) {
+            if (sum + num > target) {
+                return;
+            }
+            d.push(num);
+            sum += num;
+            backtrack();
+            d.pop();
+            sum -= num;
+        }
+    }
+}
 ```
 
 
 
-## 46. 全排列
+## 46. 全排列（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\46.png)
 
@@ -271,18 +337,21 @@ public:
 class Solution {
     int len;
     boolean[] visit;
+    int[] nums;
+    Deque<Integer> d;
     List<List<Integer>> ll;
 
     public List<List<Integer>> permute(int[] nums) {
         len = nums.length;
         visit = new boolean[len];
+        this.nums = nums;
         ll = new ArrayList<>();
-        Deque<Integer> d = new ArrayDeque<>();
-        backtrack(d, nums);
+        d = new ArrayDeque<>();
+        backtrack();
         return ll;
     }
 
-    void backtrack(Deque<Integer> d, int[] nums) {
+    void backtrack() {
         if (d.size() == len) {
             List<Integer> l = new ArrayList<>(d);
             ll.add(l);
@@ -292,7 +361,7 @@ class Solution {
             if (!visit[i]) {
                 d.push(nums[i]);
                 visit[i] = true;
-                backtrack(d, nums);
+                backtrack();
                 d.pop();
                 visit[i] = false;
             }
@@ -303,7 +372,7 @@ class Solution {
 
 
 
-## 47. 全排列 II
+## 47. 全排列 II（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\47.png)
 
@@ -313,18 +382,21 @@ class Solution {
 class Solution {
     int len;
     boolean[] visit;
+    int[] nums;
+    Deque<Integer> d;
     Set<List<Integer>> s;
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         len = nums.length;
         visit = new boolean[len];
+        this.nums = nums;
         s = new HashSet<>();
-        Deque<Integer> d = new ArrayDeque<>();
-        backtrack(d, nums);
+        d = new ArrayDeque<>();
+        backtrack();
         return new ArrayList<>(s);
     }
 
-    void backtrack(Deque<Integer> d, int[] nums) {
+    void backtrack() {
         if (d.size() == len) {
             List<Integer> l = new ArrayList<>(d);
             s.add(l);
@@ -334,7 +406,7 @@ class Solution {
             if (!visit[i]) {
                 visit[i] = true;
                 d.push(nums[i]);
-                backtrack(d, nums);
+                backtrack();
                 d.pop();
                 visit[i] = false;
             }
@@ -345,7 +417,127 @@ class Solution {
 
 
 
-## 77. 组合
+## 51. N 皇后（Java）
+
+![](D:\Notes\Leetcode\Leetcode.assets\51.png)
+
+相关视频：
+[【LeetCode 每日一题】51. N 皇后 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV17L4y1g7es/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int n;
+    boolean[] col;
+    boolean[] diag1;  // 对角线1：/
+    boolean[] diag2;  // 对角线2：\
+    char[][] mat;
+
+    List<List<String>> ll;
+
+    public List<List<String>> solveNQueens(int n) {
+        init(n);
+        backtrack(0);
+        return ll;
+    }
+
+    void init(int n) {
+        this.n = n;
+        col = new boolean[n];
+        diag1 = new boolean[2 * n - 1];
+        diag2 = new boolean[2 * n - 1];
+        mat = new char[n][n];
+        for (char[] row : mat) {
+            Arrays.fill(row, '.');
+        }
+        ll = new ArrayList<>();
+    }
+
+    void backtrack(int i) {
+        if (i == n) {
+            List<String> l = new ArrayList<>();
+            for (char[] row : mat) {
+                l.add(new String(row));
+            }
+            ll.add(l);
+            return;
+        }
+        for (int j = 0; j < n; j++) {
+            int idx1 = i + j;
+            int idx2 = i - j + n - 1;
+            if (col[j] || diag1[idx1] || diag2[idx2]) {
+                continue;
+            }
+            col[j] = true;
+            diag1[idx1] = true;
+            diag2[idx2] = true;
+            mat[i][j] = 'Q';
+            backtrack(i + 1);
+            col[j] = false;
+            diag1[idx1] = false;
+            diag2[idx2] = false;
+            mat[i][j] = '.';
+        }
+    }
+}
+```
+
+
+
+## 52. N皇后 II（Java）
+
+![](D:\Notes\Leetcode\Leetcode.assets\52.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int n;
+    boolean[] col;
+    boolean[] diag1;  // 对角线1：/
+    boolean[] diag2;  // 对角线2：\
+    int total;
+
+    public int totalNQueens(int n) {
+        init(n);
+        backtrack(0);
+        return total;
+    }
+
+    void init(int n) {
+        this.n = n;
+        col = new boolean[n];
+        diag1 = new boolean[2 * n - 1];
+        diag2 = new boolean[2 * n - 1];
+    }
+
+    void backtrack(int i) {
+        if (i == n) {
+            total++;
+            return;
+        }
+        for (int j = 0; j < n; j++) {
+            int idx1 = i + j;
+            int idx2 = i - j + n - 1;
+            if (col[j] || diag1[idx1] || diag2[idx2]) {
+                continue;
+            }
+            col[j] = true;
+            diag1[idx1] = true;
+            diag2[idx2] = true;
+            backtrack(i + 1);
+            col[j] = false;
+            diag1[idx1] = false;
+            diag2[idx2] = false;
+        }
+    }
+}
+```
+
+
+
+## 77. 组合（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\77.png)
 

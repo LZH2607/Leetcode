@@ -6,7 +6,7 @@
 
 
 
-## 6. Z 字形变换
+## 6. Z 字形变换（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\6.png)
 
@@ -55,7 +55,7 @@ class Solution {
 
 
 
-## 48. 旋转图像
+## 48. 旋转图像（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\48.png)
 
@@ -85,7 +85,7 @@ public:
 
 
 
-## 54. 螺旋矩阵
+## 54. 螺旋矩阵（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\54.png)
 
@@ -178,7 +178,7 @@ public:
 
 
 
-## 59. 螺旋矩阵 II
+## 59. 螺旋矩阵 II（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\59.png)
 
@@ -279,7 +279,7 @@ public:
 
 
 
-## 73. 矩阵置零
+## 73. 矩阵置零（C++）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\73.png)
 

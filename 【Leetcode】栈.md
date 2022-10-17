@@ -6,7 +6,7 @@
 
 
 
-## 20. 有效的括号
+## 20. 有效的括号（C++、Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\20.png)
 
@@ -119,7 +119,55 @@ class Solution {
 
 
 
-## 71. 简化路径
+## 56. 合并区间（Java）
+
+![](D:\Notes\Leetcode\Leetcode.assets\56.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    Deque<int[]> d;
+    Deque<int[]> temp;
+
+    public int[][] merge(int[][] intervals) {
+        d = new ArrayDeque<>();
+        temp = new ArrayDeque<>();
+        for (int[] interval : intervals) {
+            while (!d.isEmpty() && d.getFirst()[0] > interval[0]) {
+                temp.push(d.pop());
+            }
+            push(interval);
+            while (!temp.isEmpty()) {
+                push(temp.pop());
+            }
+        }
+        int[][] res = new int[d.size()][];
+        int i = 0;
+        while (!d.isEmpty()) {
+            res[i] = d.pop();
+            i++;
+        }
+        return res;
+    }
+
+    void push(int[] interval) {
+        if (d.isEmpty()) {
+            d.push(interval);
+            return;
+        }
+        if (d.getFirst()[1] >= interval[0]) {
+            d.getFirst()[1] = Math.max(d.getFirst()[1], interval[1]);
+        } else {
+            d.push(interval);
+        }
+    }
+}
+```
+
+
+
+## 71. 简化路径（C++、Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\71.png)
 
@@ -195,7 +243,7 @@ class Solution {
 
 
 
-## 150. 逆波兰表达式求值
+## 150. 逆波兰表达式求值（C++、Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\150.png)
 
@@ -293,7 +341,7 @@ class Solution {
 
 
 
-## 224. 基本计算器
+## 224. 基本计算器（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\224.png)
 
@@ -379,7 +427,7 @@ class Solution {
 
 
 
-## 227. 基本计算器 II
+## 227. 基本计算器 II（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\227.png)
 
@@ -449,7 +497,7 @@ class Solution {
 
 
 
-## 636. 函数的独占时间
+## 636. 函数的独占时间（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\636.png)
 
@@ -501,7 +549,7 @@ class Function {
 
 
 
-## 735. 行星碰撞
+## 735. 行星碰撞（C++、Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\735.png)
 
@@ -640,7 +688,7 @@ class Solution {
 
 
 
-## 772. 基本计算器 III
+## 772. 基本计算器 III（Java）
 
 ![](D:\Notes\Leetcode\Leetcode.assets\772.png)
 
