@@ -6,7 +6,7 @@
 
 
 
-## 20. 有效的括号（C++、Java）
+## 20. 有效的括号
 
 ![](D:\Notes\Leetcode\Leetcode.assets\20.png)
 
@@ -119,7 +119,7 @@ class Solution {
 
 
 
-## 56. 合并区间（Java）
+## 56. 合并区间
 
 ![](D:\Notes\Leetcode\Leetcode.assets\56.png)
 
@@ -167,7 +167,7 @@ class Solution {
 
 
 
-## 71. 简化路径（C++、Java）
+## 71. 简化路径
 
 ![](D:\Notes\Leetcode\Leetcode.assets\71.png)
 
@@ -243,7 +243,7 @@ class Solution {
 
 
 
-## 150. 逆波兰表达式求值（C++、Java）
+## 150. 逆波兰表达式求值
 
 ![](D:\Notes\Leetcode\Leetcode.assets\150.png)
 
@@ -341,7 +341,7 @@ class Solution {
 
 
 
-## 224. 基本计算器（Java）
+## 224. 基本计算器
 
 ![](D:\Notes\Leetcode\Leetcode.assets\224.png)
 
@@ -427,7 +427,7 @@ class Solution {
 
 
 
-## 227. 基本计算器 II（Java）
+## 227. 基本计算器 II
 
 ![](D:\Notes\Leetcode\Leetcode.assets\227.png)
 
@@ -497,7 +497,7 @@ class Solution {
 
 
 
-## 636. 函数的独占时间（Java）
+## 636. 函数的独占时间
 
 ![](D:\Notes\Leetcode\Leetcode.assets\636.png)
 
@@ -549,7 +549,7 @@ class Function {
 
 
 
-## 735. 行星碰撞（C++、Java）
+## 735. 行星碰撞
 
 ![](D:\Notes\Leetcode\Leetcode.assets\735.png)
 
@@ -688,7 +688,7 @@ class Solution {
 
 
 
-## 772. 基本计算器 III（Java）
+## 772. 基本计算器 III
 
 ![](D:\Notes\Leetcode\Leetcode.assets\772.png)
 

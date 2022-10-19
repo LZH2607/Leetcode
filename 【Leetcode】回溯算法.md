@@ -43,7 +43,7 @@ void backtrack(参数) {
 
 
 
-## 17.电话号码的字母组合（Java）
+## 17.电话号码的字母组合
 
 ![](D:\Notes\Leetcode\Leetcode.assets\17.png)
 
@@ -100,7 +100,7 @@ class Solution {
 
 
 
-## 22.括号生成（Java）
+## 22.括号生成
 
 ![](D:\Notes\Leetcode\Leetcode.assets\22.png)
 
@@ -167,113 +167,80 @@ class Solution {
 
 
 
-## 37. 解数独（C++）
+## 37. 解数独
 
 ![](D:\Notes\Leetcode\Leetcode.assets\37.png)
 
 相关视频：
 [【算法演示】回溯法求解数独，leetcode37题](https://www.bilibili.com/video/BV16U4y1E72g)
 
-我的AC代码（C++）：
+我的AC代码（Java）：
 
-```c++
+```java
 class Solution {
-public:
-	bool cntRow[9][10];
-	bool cntCol[9][10];
-	bool cntSubBox[9][10];
-	void solveSudoku(vector<vector<char>>& board) {
-		initCnt(board);
-		backtrack(board, 0, 0);
-	}
-	void initCnt(vector<vector<char>>& board) {
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 10; j++) {
-				cntRow[i][j] = false;
-				cntCol[i][j] = false;
-				cntSubBox[i][j] = false;
-			}
-		}
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				if (board[i][j] != '.') {
-					int d = (int)board[i][j] - (int)'0';
-					int b = (i / 3) * 3 + j / 3;
-					cntRow[i][d] = true;
-					cntCol[j][d] = true;
-					cntSubBox[b][d] = true;
-				}
-				
-			}
-		}
-	}
-	bool backtrack(vector<vector<char>>& board, int i, int j) {
-		if (board[i][j] != '.') {
-			if (i == 8 && j == 8) {
-				return true;
-			}
-			else if (j < 8) {
-				return backtrack(board, i, j + 1);
-			}
-			else {
-				return backtrack(board, i + 1, 0);
-			}
-		}
-		else {
-			vector<int> ds = findDigits(i, j);
-			if (ds.size() != 0) {
-				for (vector<int>::iterator it = ds.begin(); it != ds.end(); it++) {
-					int d = *it;
-					setDigit(board, i, j, d);
-					if (i == 8 && j == 8) {
-						return true;
-					}
-					else if (j < 8) {
-						if (backtrack(board, i, j + 1)) {
-							return true;
-						}
-					}
-					else {
-						if (backtrack(board, i + 1, 0)) {
-							return true;
-						}
-					}
-					resetDigit(board, i, j, d);
-				}
-			}
-			return false;
-		}
-	}
-	vector<int> findDigits(int i, int j) {
-		vector<int> ds;
-		int b = (i / 3) * 3 + j / 3;
-		for (int d = 1; d < 10; d++) {
-			if (!cntRow[i][d] && !cntCol[j][d] && !cntSubBox[b][d]) {
-				ds.push_back(d);
-			}
-		}
-		return ds;
-	}
-	void setDigit(vector<vector<char>>& board, int i, int j, int d) {
-		board[i][j] = (char)(d + (int)'0');
-		int b = (i / 3) * 3 + j / 3;
-		cntRow[i][d] = true;
-		cntCol[j][d] = true;
-		cntSubBox[b][d] = true;
-	}
-	void resetDigit(vector<vector<char>>& board, int i, int j, int d) {
-		board[i][j] = '.';
-		int b = (i / 3) * 3 + j / 3;
-		cntRow[i][d] = false;
-		cntCol[j][d] = false;
-		cntSubBox[b][d] = false;
-	}
-};
+    char[][] board;
+    boolean[][] visitRow;
+    boolean[][] visitCol;
+    boolean[][] visitBox;
+
+    public void solveSudoku(char[][] board) {
+        init(board);
+        backtrack(0, 0);
+    }
+
+    void init(char[][] board) {
+        this.board = board;
+        visitRow = new boolean[9][9];
+        visitCol = new boolean[9][9];
+        visitBox = new boolean[9][9];
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[r].length; c++) {
+                if (board[r][c] == '.') {
+                    continue;
+                }
+                int i = (int) board[r][c] - (int) '1';
+                int b = r / 3 + c / 3 * 3;
+                visitRow[r][i] = true;
+                visitCol[c][i] = true;
+                visitBox[b][i] = true;
+            }
+        }
+    }
+
+    boolean backtrack(int r, int c) {
+        if (r == 9) {
+            return true;
+        }
+        if (board[r][c] != '.') {
+            return backtrack(r + (c + 1) / 9, (c + 1) % 9);
+        }
+        int b = r / 3 + c / 3 * 3;
+        for (int i = 0; i < 9; i++) {
+            char ch = (char) (i + (int) '1');
+            if (visitRow[r][i] || visitCol[c][i] || visitBox[b][i]) {
+                continue;
+            }
+            board[r][c] = ch;
+            visitRow[r][i] = true;
+            visitCol[c][i] = true;
+            visitBox[b][i] = true;
+            if (backtrack(r + (c + 1) / 9, (c + 1) % 9)) {
+                return true;
+            }
+            // !flag
+            board[r][c] = '.';
+            visitRow[r][i] = false;
+            visitCol[c][i] = false;
+            visitBox[b][i] = false;
+        }
+        return false;
+    }
+}
 ```
 
 
 
-## 39. 组合总和（Java）
+## 39. 组合总和
 
 ![](D:\Notes\Leetcode\Leetcode.assets\39.png)
 
@@ -324,7 +291,64 @@ class Solution {
 
 
 
-## 46. 全排列（Java）
+## 40. 组合总和 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\40.png)
+
+相关视频：
+[「力扣40组和总和②」](https://www.bilibili.com/video/BV1iS4y1J7hn/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int[] nums;
+    int target;
+    int sum;
+    int len;
+    Deque<Integer> d;
+    Set<List<Integer>> sl;
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        nums = candidates;
+        Arrays.sort(nums);
+        this.target = target;
+        sum = 0;
+        len = nums.length;
+        d = new ArrayDeque<>();
+        sl = new HashSet<>();
+        backtrack(0);
+        return new ArrayList<>(sl);
+    }
+
+    void backtrack(int idx) {
+        if (sum == target) {
+            List<Integer> l = new ArrayList<>(d);
+            l.sort(Comparator.naturalOrder());
+            sl.add(l);
+            return;
+        }
+        // sum < target
+        for (int i = idx; i < len; i++) {
+            if (i > idx && nums[i] == nums[idx]) {
+                continue;
+            }
+            if (sum + nums[i] > target) {
+                break;
+            }
+            sum += nums[i];
+            d.push(nums[i]);
+            backtrack(i + 1);
+            sum -= nums[i];
+            d.pop();
+        }
+    }
+}
+```
+
+
+
+## 46. 全排列
 
 ![](D:\Notes\Leetcode\Leetcode.assets\46.png)
 
@@ -372,7 +396,7 @@ class Solution {
 
 
 
-## 47. 全排列 II（Java）
+## 47. 全排列 II
 
 ![](D:\Notes\Leetcode\Leetcode.assets\47.png)
 
@@ -417,7 +441,7 @@ class Solution {
 
 
 
-## 51. N 皇后（Java）
+## 51. N 皇后
 
 ![](D:\Notes\Leetcode\Leetcode.assets\51.png)
 
@@ -485,7 +509,7 @@ class Solution {
 
 
 
-## 52. N皇后 II（Java）
+## 52. N皇后 II
 
 ![](D:\Notes\Leetcode\Leetcode.assets\52.png)
 
@@ -537,7 +561,7 @@ class Solution {
 
 
 
-## 77. 组合（C++）
+## 77. 组合
 
 ![](D:\Notes\Leetcode\Leetcode.assets\77.png)
 
@@ -571,3 +595,36 @@ public:
     }
 };
 ```
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int n;
+    int k;
+    Deque<Integer> d;
+    List<List<Integer>> ll;
+
+    public List<List<Integer>> combine(int n, int k) {
+        this.n = n;
+        this.k = k;
+        d = new ArrayDeque<>();
+        ll = new ArrayList<>();
+        backtrack(1, 1);
+        return ll;
+    }
+
+    void backtrack(int idx, int len) {
+        if (d.size() == k) {
+            ll.add(Arrays.asList(d.toArray(new Integer[d.size()])));
+            return;
+        }
+        for (int i = idx; i <= n - k + len; i++) {
+            d.push(i);
+            backtrack(i + 1, len + 1);
+            d.pop();
+        }
+    }
+}
+```
+

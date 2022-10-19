@@ -47,3 +47,38 @@ class Solution {
 }
 ```
 
+
+
+## 60. 排列序列
+
+![](D:\Notes\Leetcode\Leetcode.assets\60.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String getPermutation(int n, int k) {
+        List<String> l = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            l.add(i + "");
+        }
+        String res = "";
+        n--;
+        k--;
+        int factorial = 1;
+        for (int i = 1; i <= n; i++) {
+            factorial *= i;
+        }
+        while (n > 0) {
+            int idx = k / factorial;
+            res += l.remove(idx);
+            k -= idx * factorial;
+            factorial /= n;
+            n--;
+        }
+        res += l.remove(0);
+        return res;
+    }
+}
+```
+

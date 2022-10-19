@@ -506,6 +506,72 @@ class Solution {
 
 
 
+## 45. 跳跃游戏 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\45.png)
+
+相关视频：
+[五分钟力扣 Leetcode 第45题  跳跃游戏 II 清晰易懂 例子阐述 10行代码解决一道困难题 不要错过](https://www.bilibili.com/video/BV1SA41147aU/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int jump(int[] nums) {
+        int len = nums.length;
+        int r_idx = 0;
+        int l_idx = 0;
+        int cnt = 0;
+        int i = -1;
+        while (i <= r_idx - 1 && r_idx < len - 1) {
+            i++;
+            if (i + nums[i] > l_idx) {
+                l_idx = i + nums[i];
+            }
+            if (i == r_idx) {
+                r_idx = l_idx;
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+}
+```
+
+
+
+## 55. 跳跃游戏
+
+![](D:\Notes\Leetcode\Leetcode.assets\55.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean canJump(int[] nums) {
+        int len = nums.length;
+        int r_idx = 0;
+        int l_idx = 0;
+        int i = -1;
+        while (i <= r_idx - 1 && i < len - 1) {
+            i++;
+            if (i + nums[i] > l_idx) {
+                l_idx = i + nums[i];
+            }
+            if (i == r_idx) {
+                r_idx = l_idx;
+            }
+        }
+        if (i < len - 1) {
+            return false;
+        }
+        return true;
+    }
+}
+```
+
+
+
 ## 167. 两数之和 II - 输入有序数组
 
 ![](D:\Notes\Leetcode\Leetcode.assets\167.png)

@@ -38,7 +38,7 @@ int binarySearch(int[] nums, int target) {
 
 
 
-## 33. 搜索旋转排序数组（Java）
+## 33. 搜索旋转排序数组
 
 ![](D:\Notes\Leetcode\Leetcode.assets\33.png)
 
@@ -95,7 +95,7 @@ class Solution {
 
 
 
-## 34. 在排序数组中查找元素的第一个和最后一个位置（Java）
+## 34. 在排序数组中查找元素的第一个和最后一个位置
 
 ![](D:\Notes\Leetcode\Leetcode.assets\34.png)
 
@@ -148,7 +148,7 @@ class Solution {
 
 
 
-## 35. 搜索插入位置（Java）
+## 35. 搜索插入位置
 
 ![](D:\Notes\Leetcode\Leetcode.assets\35.png)
 
@@ -174,7 +174,7 @@ class Solution {
 
 
 
-## 278. 第一个错误的版本（Java）
+## 278. 第一个错误的版本
 
 ![](D:\Notes\Leetcode\Leetcode.assets\278.png)
 
@@ -200,7 +200,7 @@ public class Solution extends VersionControl {
 
 
 
-## 704. 二分查找（Java）
+## 704. 二分查找
 
 ![](D:\Notes\Leetcode\Leetcode.assets\704.png)
 

@@ -461,6 +461,88 @@ class Solution {
 
 
 
+## 66. 加一
+
+![](D:\Notes\Leetcode\Leetcode.assets\66.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int[] plusOne(int[] digits) {
+        Deque<Integer> seq = new ArrayDeque<>();
+        int c = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int s = digits[i] + c;
+            int d = s % 10;
+            c = s / 10;
+            seq.push(d);
+        }
+        if (c > 0) {
+            seq.push(c);
+        }
+        int[] ans = new int[seq.size()];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = seq.pollFirst();
+        }
+        return ans;
+    }
+}
+```
+
+
+
+## 67. 二进制求和
+
+![](D:\Notes\Leetcode\Leetcode.assets\67.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public String addBinary(String a, String b) {
+        a = new StringBuffer(a).reverse().toString();
+        b = new StringBuffer(b).reverse().toString();
+        int len1 = a.length();
+        int len2 = b.length();
+        Deque<Integer> seq = new ArrayDeque<>();
+        int i = 0;
+        int c = 0;
+        while (i < len1 && i < len2) {
+            int s = Integer.parseInt(a.substring(i, i + 1)) + Integer.parseInt(b.substring(i, i + 1)) + c;
+            int d = s % 2;
+            c = s / 2;
+            seq.push(d);
+            i++;
+        }
+        while (i < len1) {
+            int s = Integer.parseInt(a.substring(i, i + 1)) + c;
+            int d = s % 2;
+            c = s / 2;
+            seq.push(d);
+            i++;
+        }
+        while (i < len2) {
+            int s = Integer.parseInt(b.substring(i, i + 1)) + c;
+            int d = s % 2;
+            c = s / 2;
+            seq.push(d);
+            i++;
+        }
+        if (c > 0) {
+            seq.push(c);
+        }
+        String res = "";
+        while (!seq.isEmpty()) {
+            res += seq.pollFirst();
+        }
+        return res;
+    }
+}
+```
+
+
+
 ## 393. UTF-8 编码验证
 
 ![](D:\Notes\Leetcode\Leetcode.assets\393.png)

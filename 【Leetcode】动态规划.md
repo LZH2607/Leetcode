@@ -6,7 +6,7 @@
 
 
 
-## 5.最长回文子串（C++）
+## 5.最长回文子串
 
 ![](D:\Notes\Leetcode\Leetcode.assets\5.png)
 
@@ -60,7 +60,7 @@ public:
 
 
 
-## 32. 最长有效括号（C++）
+## 32. 最长有效括号
 
 ![](D:\Notes\Leetcode\Leetcode.assets\32.png)
 
@@ -103,7 +103,7 @@ public:
 
 
 
-## 53. 最大子数组和（Java）
+## 53. 最大子数组和
 
 ![](D:\Notes\Leetcode\Leetcode.assets\53.png)
 
@@ -135,7 +135,7 @@ class Solution {
 
 
 
-## 62. 不同路径（C++）
+## 62. 不同路径
 
 ![](D:\Notes\Leetcode\Leetcode.assets\62.png)
 
@@ -167,7 +167,7 @@ public:
 
 
 
-## 63. 不同路径 II（C++）
+## 63. 不同路径 II
 
 ![](D:\Notes\Leetcode\Leetcode.assets\63.png)
 
@@ -223,7 +223,76 @@ public:
 
 
 
-## 300. 最长递增子序列（Java）
+## 64. 最小路径和
+
+![](D:\Notes\Leetcode\Leetcode.assets\64.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int m;
+    int n;
+    int[][] dp;
+
+    public int minPathSum(int[][] grid) {
+        m = grid.length;
+        n = grid[0].length;
+        dp = new int[m][n];
+        dp[m - 1][n - 1] = grid[m - 1][n - 1];
+        for (int r = m - 2; r >= 0; r--) {
+            dp[r][n - 1] = dp[r + 1][n - 1] + grid[r][n - 1];
+        }
+        for (int c = n - 2; c >= 0; c--) {
+            dp[m - 1][c] = dp[m - 1][c + 1] + grid[m - 1][c];
+        }
+        for (int r = m - 2; r >= 0; r--) {
+            for (int c = n - 2; c >= 0; c--) {
+                dp[r][c] = Math.min(dp[r + 1][c], dp[r][c + 1]) + grid[r][c];
+            }
+        }
+        return dp[0][0];
+    }
+}
+```
+
+
+
+## 139. 单词拆分
+
+![](D:\Notes\Leetcode\Leetcode.assets\139.png)
+
+相关视频：
+[【300题刷题挑战】leetcode力扣139 单词拆分 wordBreak 第七十三题 | 动态规划 Dynamic Planning](https://www.bilibili.com/video/BV1YN411X7g5/)
+[【LeetCode 每日一题】139. 单词拆分 | 手写图解版思路 + 代码讲解](https://www.bilibili.com/video/BV1mt4y1s7H1/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        int len = s.length();
+        boolean[] dp = new boolean[len];
+        Set<String> set = new HashSet<>(wordDict);
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j <= i; j++) {
+                if (j > 0 && !dp[j - 1]) {
+                    continue;
+                }
+                if (set.contains(s.substring(j, i + 1))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[len - 1];
+    }
+}
+```
+
+
+
+## 300. 最长递增子序列
 
 ![](D:\Notes\Leetcode\Leetcode.assets\300.png)
 
