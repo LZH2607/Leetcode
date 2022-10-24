@@ -130,21 +130,21 @@ class Solution {
 
 ```java
 class Solution {
-    int row;
-    int col;
+    int rows;
+    int cols;
     int len;
     int[] heights;
 
     public int maximalRectangle(char[][] matrix) {
-        row = matrix.length;
-        if (row == 0) {
+        rows = matrix.length;
+        if (rows == 0) {
             return 0;
         }
-        col = matrix[0].length;
-        len = col;
+        cols = matrix[0].length;
+        len = cols;
         heights = new int[len];
         int maxArea = 0;
-        for (int r = 0; r < row; r++) {
+        for (int r = 0; r < rows; r++) {
             getHeights(matrix, r);
             int area = getMaxArea();
             if (area > maxArea) {
@@ -321,6 +321,136 @@ class StockSpanner {
         int[] arr = {price, cnt};
         d.push(arr);
         return d.getFirst()[1];
+    }
+}
+```
+
+
+
+## 907. 子数组的最小值之和
+
+![](D:\Notes\Leetcode\Leetcode.assets\907.png)
+
+相关视频：
+[【每日一题】907. Sum of Subarray Minimums, 5/11/2021](https://www.youtube.com/watch?v=TZyBPy7iOAw)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        Deque<Number> d = new ArrayDeque<>();
+        d.push(new Number(Integer.MIN_VALUE, -1));
+        int len = arr.length;
+        long sum = 0;
+        for (int i = 0; i < len; i++) {
+            while (d.getFirst().value >= arr[i]) {
+                Number num = d.pollFirst();
+                int l_idx = d.getFirst().idx + 1;
+                int r_idx = i - 1;
+                sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+                sum %= 1000000007L;
+            }
+            d.push(new Number(arr[i], i));
+        }
+        while (d.size() > 1) {
+            Number num = d.pollFirst();
+            int l_idx = d.getFirst().idx + 1;
+            int r_idx = len - 1;
+            sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+            sum %= 1000000007L;
+        }
+        return (int) sum;
+    }
+}
+
+class Number {
+    int value;
+    int idx;
+
+    Number(int value, int idx) {
+        this.value = value;
+        this.idx = idx;
+    }
+}
+```
+
+
+
+## 2104. 子数组范围和
+
+![](D:\Notes\Leetcode\Leetcode.assets\2104.png)
+
+相关视频：
+[【每日一题】LeetCode 2104. Sum of Subarray Ranges](https://www.youtube.com/watch?v=xba0NzSbuas)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int[] nums;
+    int len;
+    Deque<Number> d;
+
+    public long subArrayRanges(int[] nums) {
+        this.nums = nums;
+        len = nums.length;
+        d = new ArrayDeque<>();
+        return sumSubarrayMaxs() - sumSubarrayMins();
+    }
+
+    long sumSubarrayMins() {
+        d.clear();
+        d.push(new Number(Integer.MIN_VALUE, -1));
+        long sum = 0;
+        for (int i = 0; i < len; i++) {
+            while (d.getFirst().value >= nums[i]) {
+                Number num = d.pollFirst();
+                int l_idx = d.getFirst().idx + 1;
+                int r_idx = i - 1;
+                sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+            }
+            d.push(new Number(nums[i], i));
+        }
+        while (d.size() > 1) {
+            Number num = d.pollFirst();
+            int l_idx = d.getFirst().idx + 1;
+            int r_idx = len - 1;
+            sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+        }
+        return sum;
+    }
+
+    long sumSubarrayMaxs() {
+        d.clear();
+        d.push(new Number(Integer.MAX_VALUE, -1));
+        long sum = 0;
+        for (int i = 0; i < len; i++) {
+            while (d.getFirst().value <= nums[i]) {
+                Number num = d.pollFirst();
+                int l_idx = d.getFirst().idx + 1;
+                int r_idx = i - 1;
+                sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+            }
+            d.push(new Number(nums[i], i));
+        }
+        while (d.size() > 1) {
+            Number num = d.pollFirst();
+            int l_idx = d.getFirst().idx + 1;
+            int r_idx = len - 1;
+            sum += (long) num.value * (num.idx - l_idx + 1) * (r_idx - num.idx + 1);
+        }
+        return sum;
+    }
+}
+
+class Number {
+    int value;
+    int idx;
+
+    Number(int value, int idx) {
+        this.value = value;
+        this.idx = idx;
     }
 }
 ```

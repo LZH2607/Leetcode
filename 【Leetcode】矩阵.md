@@ -344,3 +344,121 @@ public:
 };
 ```
 
+
+
+## 531. 孤独像素 I
+
+![](D:\Notes\Leetcode\Leetcode.assets\531.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int findLonelyPixel(char[][] picture) {
+        int m = picture.length;
+        int n = picture[0].length;
+        int[] cntRow = new int[m];
+        int[] cntCol = new int[n];
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                if (picture[r][c] == 'B') {
+                    cntRow[r]++;
+                    cntCol[c]++;
+                }
+            }
+        }
+        int cnt = 0;
+        for (int r = 0; r < m; r++) {
+            if (cntRow[r] > 1) {
+                continue;
+            }
+            // cntRow[r] == 1
+            for (int c = 0; c < n; c++) {
+                if (picture[r][c] == 'W') {
+                    continue;
+                }
+                // picture[r][c] == 'B'
+                if (cntCol[c] == 1) {
+                    cnt++;
+                }
+                break;
+            }
+        }
+        return cnt;
+    }
+}
+```
+
+
+
+## 533. 孤独像素 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\533.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int findBlackPixel(char[][] picture, int target) {
+        int m = picture.length;
+        int n = picture[0].length;
+        int[] cntRow = new int[m];
+        int[] cntCol = new int[n];
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                if (picture[r][c] == 'B') {
+                    cntRow[r]++;
+                    cntCol[c]++;
+                    if (!map.containsKey(c)) {
+                        List<Integer> l = new ArrayList<>();
+                        l.add(r);
+                        map.put(c, l);
+                        continue;
+                    }
+                    // m.containsKey(c)
+                    map.get(c).add(r);
+                }
+            }
+        }
+        boolean[][] same = new boolean[m][m];
+        for (int r1 = 0; r1 < m; r1++) {
+            String s1 = new String(picture[r1]);
+            for (int r2 = r1; r2 < m; r2++) {
+                if (r1 == r2) {
+                    same[r1][r2] = true;
+                    continue;
+                }
+                String s2 = new String(picture[r2]);
+                same[r1][r2] = s1.equals(s2);
+                same[r2][r1] = same[r1][r2];
+            }
+        }
+        int cnt = 0;
+        for (int r = 0; r < m; r++) {
+            if (cntRow[r] != target) {
+                continue;
+            }
+            // cntRow[r] == target
+            for (int c = 0; c < n; c++) {
+                if (cntCol[c] != target) {
+                    continue;
+                }
+                // cntCol[c] == target
+                boolean flag = true;
+                for (int i : map.get(c)) {
+                    if (!same[r][i]) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+}
+```
+

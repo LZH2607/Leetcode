@@ -78,6 +78,81 @@ class Solution {
 
 
 
+## 924. 尽量减少恶意软件的传播
+
+![](D:\Notes\Leetcode\Leetcode.assets\924.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    List<List<Integer>> ll;
+    int n;
+    boolean[] visit;
+    int[] initial;
+    int M;
+    int minM;
+    int res;
+
+    public int minMalwareSpread(int[][] graph, int[] initial) {
+        init(graph, initial);
+        for (int i : initial) {
+            reset();
+            for (int j : initial) {
+                if (i == j) {
+                    continue;
+                }
+                dfs(j);
+            }
+            if (M < minM) {
+                minM = M;
+                res = i;
+            } else if (M == minM && i < res) {
+                res = i;
+            }
+        }
+        return res;
+    }
+
+    void init(int[][] graph, int[] initial) {
+        ll = new ArrayList<>();
+        n = graph.length;
+        for (int i = 0; i < n; i++) {
+            List<Integer> l = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if (graph[i][j] != 0 && i != j) {
+                    l.add(j);
+                }
+            }
+            ll.add(l);
+        }
+        visit = new boolean[n];
+        this.initial = initial;
+        M = 0;
+        minM = Integer.MAX_VALUE;
+    }
+
+    void reset() {
+        Arrays.fill(visit, false);
+        M = 0;
+    }
+
+    void dfs(int i) {
+        if (visit[i]) {
+            return;
+        }
+        visit[i] = true;
+        M++;
+        List<Integer> neighbors = ll.get(i);
+        for (int neighbor : neighbors) {
+            dfs(neighbor);
+        }
+    }
+}
+```
+
+
+
 ## 934. 最短的桥
 
 ![](D:\Notes\Leetcode\Leetcode.assets\934.png)

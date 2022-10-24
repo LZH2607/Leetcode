@@ -292,6 +292,67 @@ class Solution {
 
 
 
+## 198. 打家劫舍
+
+![](D:\Notes\Leetcode\Leetcode.assets\198.png)
+
+相关视频：
+[【每日一题】198. House Robber, 3/9/2020](https://www.youtube.com/watch?v=IcEX9Oi_tao)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        int sum1 = 0;
+        int sum2 = 0;
+        for (int num : nums) {
+            int temp1 = sum1;
+            int temp2 = sum2;
+            sum1 = temp2 + num;
+            sum2 = Math.max(temp1, temp2);
+        }
+        return Math.max(sum1, sum2);
+    }
+}
+```
+
+
+
+## 213. 打家劫舍 II
+
+![](D:\Notes\Leetcode\Leetcode.assets\213.png)
+
+相关视频：
+[【每日一题】213. House Robber II, 3/8/2020](https://www.youtube.com/watch?v=5NsRK9TDCRo)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        return Math.max(robByRange(nums, 0, nums.length - 2), robByRange(nums, 1, nums.length - 1));
+    }
+
+    int robByRange(int[] nums, int l_idx, int r_idx) {
+        int sum1 = 0;
+        int sum2 = 0;
+        for (int i = l_idx; i <= r_idx; i++) {
+            int temp1 = sum1;
+            int temp2 = sum2;
+            sum1 = temp2 + nums[i];
+            sum2 = Math.max(temp1, temp2);
+        }
+        return Math.max(sum1, sum2);
+    }
+}
+```
+
+
+
 ## 300. 最长递增子序列
 
 ![](D:\Notes\Leetcode\Leetcode.assets\300.png)

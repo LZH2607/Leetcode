@@ -772,3 +772,46 @@ class Solution {
 }
 ```
 
+
+
+## 856. 括号的分数
+
+![](D:\Notes\Leetcode\Leetcode.assets\856.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int scoreOfParentheses(String s) {
+        Deque<String> d = new ArrayDeque<>();
+        int len = s.length();
+        for (int i = 0; i < len; i++) {
+            String parenthesis = s.substring(i, i + 1);
+            if (parenthesis.equals("(")) {
+                d.push(parenthesis);
+                continue;
+            }
+            // parenthesis.equals(")")
+            if (d.getFirst().equals("(")) {
+                d.pollFirst();
+                d.push("1");
+                continue;
+            }
+            int score = 0;
+            while (!d.getFirst().equals("(")) {
+                score += Integer.parseInt(d.pollFirst());
+            }
+            // d.getFirst().equals("(")
+            d.pollFirst();
+            score *= 2;
+            d.push(score + "");
+        }
+        int score = 0;
+        while (d.size() > 0) {
+            score += Integer.parseInt(d.pollFirst());
+        }
+        return score;
+    }
+}
+```
+

@@ -75,3 +75,65 @@ class Solution {
 }
 ```
 
+
+
+## 1197. 进击的骑士
+
+![](D:\Notes\Leetcode\Leetcode.assets\1197.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int minKnightMoves(int x, int y) {
+        if (x < 0) {
+            x = -x;
+        }
+        if (y < 0) {
+            y = -y;
+        }
+        // 将(0, 0) → (x, y)变换为(1, 1) → (x+1, y+1)
+        x++;
+        y++;
+        int m = 400;
+        int n = 400;
+        boolean[][] visit = new boolean[m][n];
+        int[] dx = {2, 1, -1, -2, -2, -1, 1, 2};
+        int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
+        Deque<Coordinate> d = new ArrayDeque<>();
+        d.push(new Coordinate(1, 1, 0));
+        int minMoves = 0;
+        while (!d.isEmpty()) {
+            Coordinate coordinate = d.pollLast();
+            if (coordinate.x < 0 || coordinate.x >= m || coordinate.y < 0 || coordinate.y >= n) {
+                continue;
+            }
+            if (visit[coordinate.x][coordinate.y]) {
+                continue;
+            }
+            visit[coordinate.x][coordinate.y] = true;
+            if (coordinate.x == x && coordinate.y == y) {
+                minMoves = coordinate.moves;
+                break;
+            }
+            for (int i = 0; i < 8; i++) {
+                d.push(new Coordinate(coordinate.x + dx[i], coordinate.y + dy[i], coordinate.moves + 1));
+            }
+        }
+        return minMoves;
+    }
+}
+
+class Coordinate {
+    int x;
+    int y;
+    int moves;
+
+    Coordinate(int x, int y, int moves) {
+        this.x = x;
+        this.y = y;
+        this.moves = moves;
+    }
+}
+```
+

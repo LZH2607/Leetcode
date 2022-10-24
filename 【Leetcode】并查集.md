@@ -337,6 +337,86 @@ class Solution {
 
 
 
+## 924. 尽量减少恶意软件的传播
+
+![](D:\Notes\Leetcode\Leetcode.assets\924.png)
+
+相关视频：
+[LeetCode 924. Minimize Malware Spread 中文解释 Chinese Version](https://www.youtube.com/watch?v=KatWkb0nEbI)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int n;
+    int[] parent;
+    int M;
+    int minM;
+    int res;
+
+    public int minMalwareSpread(int[][] graph, int[] initial) {
+        n = graph.length;
+        parent = new int[n];
+        Arrays.fill(parent, -1);
+        M = 0;
+        minM = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (graph[i][j] == 0) {
+                    continue;
+                }
+                int root1 = find(i);
+                int root2 = find(j);
+                if (root1 == root2) {
+                    continue;
+                }
+                if (parent[root1] <= parent[root2]) {
+                    parent[root1] += parent[root2];
+                    parent[root2] = root1;
+                } else {  // parent[root1] > parent[root2]
+                    parent[root2] += parent[root1];
+                    parent[root1] = root2;
+                }
+            }
+        }
+        Map<Integer, int[]> m = new HashMap<>();
+        for (int i : initial) {
+            int root = find(i);
+            if (!m.containsKey(root)) {
+                int[] arr = {Math.abs(parent[root]), 1};
+                m.put(root, arr);
+                continue;
+            }
+            m.get(root)[1]++;
+        }
+        for (int i : initial) {
+            int root = find(i);
+            m.get(root)[1]--;
+            for (int k : m.keySet()) {
+                if (m.get(k)[1] > 0) {
+                    M += m.get(k)[0];
+                }
+            }
+            if (M < minM) {
+                minM = M;
+                res = i;
+            } else if (M == minM && i < res) {
+                res = i;
+            }
+            m.get(root)[1]++;
+            M = 0;
+        }
+        return res;
+    }
+
+    int find(int i) {
+        return parent[i] < 0 ? i : find(parent[i]);
+    }
+}
+```
+
+
+
 ## 1061. 按字典序排列最小的等效字符串
 
 ![](D:\Notes\Leetcode\Leetcode.assets\1061.png)

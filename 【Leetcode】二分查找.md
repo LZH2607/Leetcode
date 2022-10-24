@@ -227,3 +227,123 @@ class Solution {
 }
 ```
 
+
+
+## 933. 最近的请求次数
+
+![](D:\Notes\Leetcode\Leetcode.assets\933.png)
+
+我的AC代码（Java）：
+
+```java
+class RecentCounter {
+    int[] arr;
+    int idx;
+
+    public RecentCounter() {
+        arr = new int[10000];
+        idx = 0;
+    }
+
+    public int ping(int t) {
+        arr[idx] = t;
+        idx++;
+        // 二分查找
+        int l_idx = -1;
+        int r_idx = idx;
+        while (l_idx + 1 < r_idx) {
+            int mid_idx = (l_idx + r_idx) / 2;
+            if (arr[mid_idx] < t - 3000) {
+                l_idx = mid_idx;
+            } else {
+                r_idx = mid_idx;
+            }
+        }
+        return idx - r_idx;
+    }
+}
+```
+
+
+
+## 1102. 得分最高的路径
+
+![](D:\Notes\Leetcode\Leetcode.assets\1102.png)
+
+相关视频：
+[【LeetCode】1102. Path With Maximum Minimum Value](https://www.bilibili.com/video/BV1j34y1p7Mu/)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    int[][] grid;
+    int m;
+    int n;
+    List<Integer> l;
+    int len;
+    int minimum;
+    boolean[][] visit;
+    int[] dr = {-1, 0, 1, 0};
+    int[] dc = {0, 1, 0, -1};
+
+    public int maximumMinimumPath(int[][] grid) {
+        init(grid);
+        // 二分搜索
+        int l_idx = -1;
+        int r_idx = len;
+        while (l_idx + 1 < r_idx) {
+            int mid_idx = (l_idx + r_idx) / 2;
+            minimum = l.get(mid_idx);
+            resetVisit();
+            if (dfs(0, 0)) {
+                l_idx = mid_idx;
+            } else {
+                r_idx = mid_idx;
+            }
+        }
+        return l.get(l_idx);
+    }
+
+    void init(int[][] grid) {
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+        visit = new boolean[m][n];
+        Set<Integer> s = new HashSet<>();
+        for (int[] row : grid) {
+            for (int i : row) {
+                s.add(i);
+            }
+        }
+        l = new ArrayList<>(s);
+        l.sort(Comparator.naturalOrder());
+        len = l.size();
+    }
+
+    void resetVisit() {
+        for (boolean[] row : visit) {
+            Arrays.fill(row, false);
+        }
+    }
+
+    boolean dfs(int r, int c) {
+        if (r < 0 || r >= m || c < 0 || c >= n) {
+            return false;
+        }
+        if (r == m - 1 && c == n - 1) {
+            return grid[r][c] >= minimum;
+        }
+        if (visit[r][c] || grid[r][c] < minimum) {
+            return false;
+        }
+        visit[r][c] = true;
+        boolean flag = false;
+        for (int i = 0; i < 4; i++) {
+            flag = flag || dfs(r + dr[i], c + dc[i]);
+        }
+        return flag;
+    }
+}
+```
+

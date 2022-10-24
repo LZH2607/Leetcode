@@ -176,3 +176,58 @@ class Solution {
 }
 ```
 
+
+
+## 1636. 按照频率将数组升序排序
+
+![](D:\Notes\Leetcode\Leetcode.assets\1636.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        int len = nums.length;
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int num : nums) {
+            if (!m.containsKey(num)) {
+                m.put(num, 1);
+                continue;
+            }
+            m.put(num, m.get(num) + 1);
+        }
+        List<Number> l = new ArrayList<>();
+        for (int num : m.keySet()) {
+            l.add(new Number(num, m.get(num)));
+        }
+        l.sort(new Comparator<Number>() {
+            public int compare(Number num1, Number num2) {
+                if (num1.freq != num2.freq) {
+                    return num1.freq - num2.freq;
+                }
+                // num1.freq == num2.freq
+                return num2.value - num1.value;
+            }
+        });
+        int[] res = new int[len];
+        int idx = 0;
+        for (Number num : l) {
+            for (int i = 0; i < num.freq; i++, idx++) {
+                res[idx] = num.value;
+            }
+        }
+        return res;
+    }
+}
+
+class Number {
+    int value;
+    int freq;
+
+    Number(int value, int freq) {
+        this.value = value;
+        this.freq = freq;
+    }
+}
+```
+

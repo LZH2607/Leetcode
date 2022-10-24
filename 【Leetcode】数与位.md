@@ -583,3 +583,35 @@ class Solution {
 }
 ```
 
+
+
+## 670. 最大交换
+
+![](D:\Notes\Leetcode\Leetcode.assets\670.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int maximumSwap(int num) {
+        char[] arr = (num + "").toCharArray();
+        int len = arr.length;
+        int maxNum = num;
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                char temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                if (Integer.parseInt(new String(arr)) > maxNum) {
+                    maxNum = Integer.parseInt(new String(arr));
+                }
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        return maxNum;
+    }
+}
+```
+
