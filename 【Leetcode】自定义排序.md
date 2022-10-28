@@ -17,7 +17,6 @@ class Solution {
     public String rankTeams(String[] votes) {
         int n = votes[0].length();
         HashMap<String, Team> m = new HashMap<>();
-        ArrayList<Team> l;
         String res = "";
         for (String vote : votes) {
             for (int i = 0; i < vote.length(); i++) {
@@ -31,8 +30,8 @@ class Solution {
                 }
             }
         }
-        l = new ArrayList<Team>(m.values());
-        Collections.sort(l, new Comparator<Team>() {
+        List<Team> l = new ArrayList<Team>(m.values());
+        l.sort(new Comparator<Team>() {
             public int compare(Team t1, Team t2) {
                 for (int i = 0; i < n; i++) {
                     if (t1.cnt[i] != t2.cnt[i]) {
@@ -70,11 +69,11 @@ class Team {
 ```java
 class Solution {
     public int getKth(int lo, int hi, int k) {
-        ArrayList<Int> l = new ArrayList<>();
+        List<Int> l = new ArrayList<>();
         for (int i = lo; i <= hi; i++) {
             l.add(new Int(i, calWeight(i)));
         }
-        Collections.sort(l, new Comparator<Int>() {
+        l.sort(new Comparator<Int>() {
             public int compare(Int i1, Int i2) {
                 if (i1.weight != i2.weight) {
                     return i1.weight - i2.weight;
@@ -124,12 +123,12 @@ class Int {
 class Solution {
     public String arrangeWords(String text) {
         String[] strs = text.toLowerCase().split(" ");
-        ArrayList<Str> l = new ArrayList<>();
+        List<Str> l = new ArrayList<>();
         String res = "";
         for (int i = 0; i < strs.length; i++) {
             l.add(new Str(strs[i], i));
         }
-        Collections.sort(l, new Comparator<Str>() {
+        l.sort(new Comparator<Str>() {
             public int compare(Str s1, Str s2) {
                 if (s1.str.length() != s2.str.length()) {
                     return s1.str.length() - s2.str.length();

@@ -119,54 +119,6 @@ class Solution {
 
 
 
-## 56. 合并区间
-
-![](D:\Notes\Leetcode\Leetcode.assets\56.png)
-
-我的AC代码（Java）：
-
-```java
-class Solution {
-    Deque<int[]> d;
-    Deque<int[]> temp;
-
-    public int[][] merge(int[][] intervals) {
-        d = new ArrayDeque<>();
-        temp = new ArrayDeque<>();
-        for (int[] interval : intervals) {
-            while (!d.isEmpty() && d.getFirst()[0] > interval[0]) {
-                temp.push(d.pop());
-            }
-            push(interval);
-            while (!temp.isEmpty()) {
-                push(temp.pop());
-            }
-        }
-        int[][] res = new int[d.size()][];
-        int i = 0;
-        while (!d.isEmpty()) {
-            res[i] = d.pop();
-            i++;
-        }
-        return res;
-    }
-
-    void push(int[] interval) {
-        if (d.isEmpty()) {
-            d.push(interval);
-            return;
-        }
-        if (d.getFirst()[1] >= interval[0]) {
-            d.getFirst()[1] = Math.max(d.getFirst()[1], interval[1]);
-        } else {
-            d.push(interval);
-        }
-    }
-}
-```
-
-
-
 ## 71. 简化路径
 
 ![](D:\Notes\Leetcode\Leetcode.assets\71.png)

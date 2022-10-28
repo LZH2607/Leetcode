@@ -506,72 +506,6 @@ class Solution {
 
 
 
-## 45. 跳跃游戏 II
-
-![](D:\Notes\Leetcode\Leetcode.assets\45.png)
-
-相关视频：
-[五分钟力扣 Leetcode 第45题  跳跃游戏 II 清晰易懂 例子阐述 10行代码解决一道困难题 不要错过](https://www.bilibili.com/video/BV1SA41147aU/)
-
-我的AC代码（Java）：
-
-```java
-class Solution {
-    public int jump(int[] nums) {
-        int len = nums.length;
-        int r_idx = 0;
-        int l_idx = 0;
-        int cnt = 0;
-        int i = -1;
-        while (i <= r_idx - 1 && r_idx < len - 1) {
-            i++;
-            if (i + nums[i] > l_idx) {
-                l_idx = i + nums[i];
-            }
-            if (i == r_idx) {
-                r_idx = l_idx;
-                cnt++;
-            }
-        }
-        return cnt;
-    }
-}
-```
-
-
-
-## 55. 跳跃游戏
-
-![](D:\Notes\Leetcode\Leetcode.assets\55.png)
-
-我的AC代码（Java）：
-
-```java
-class Solution {
-    public boolean canJump(int[] nums) {
-        int len = nums.length;
-        int r_idx = 0;
-        int l_idx = 0;
-        int i = -1;
-        while (i <= r_idx - 1 && i < len - 1) {
-            i++;
-            if (i + nums[i] > l_idx) {
-                l_idx = i + nums[i];
-            }
-            if (i == r_idx) {
-                r_idx = l_idx;
-            }
-        }
-        if (i < len - 1) {
-            return false;
-        }
-        return true;
-    }
-}
-```
-
-
-
 ## 167. 两数之和 II - 输入有序数组
 
 ![](D:\Notes\Leetcode\Leetcode.assets\167.png)
@@ -718,6 +652,53 @@ class Solution {
             r_idx--;
         }
         return true;
+    }
+}
+```
+
+
+
+## 986. 区间列表的交集
+
+![](D:\Notes\Leetcode\Leetcode.assets\986.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        List<int[]> l = new ArrayList<>();
+        int idx1 = 0;
+        int idx2 = 0;
+        while (idx1 < firstList.length && idx2 < secondList.length) {
+            if (firstList[idx1][1] < secondList[idx2][0]) {
+                idx1++;
+                continue;
+            }
+            if (secondList[idx2][1] < firstList[idx1][0]) {
+                idx2++;
+                continue;
+            }
+            // firstList[idx1][1] >= secondList[idx2][0]
+            // secondList[idx2][1] >= firstList[idx1][0]
+            int start = Math.max(firstList[idx1][0], secondList[idx2][0]);
+            int end = Math.min(firstList[idx1][1], secondList[idx2][1]);
+            int[] interval = {start, end};
+            l.add(interval);
+            if (firstList[idx1][1] == end) {
+                idx1++;
+            }
+            if (secondList[idx2][1] == end) {
+                idx2++;
+            }
+        }
+        int[][] res = new int[l.size()][];
+        int i = 0;
+        for (int[] interval : l) {
+            res[i] = interval;
+            i++;
+        }
+        return res;
     }
 }
 ```
