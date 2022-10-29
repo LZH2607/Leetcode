@@ -6,6 +6,60 @@
 
 
 
+## 436. 寻找右区间
+
+![](D:\Notes\Leetcode\Leetcode.assets\436.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int[] findRightInterval(int[][] intervals) {
+        int len = intervals.length;
+        List<Interval> l = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            l.add(new Interval(i, intervals[i]));
+        }
+        l.sort(new Comparator<Interval>() {
+            public int compare(Interval i1, Interval i2) {
+                if (i1.interval[0] != i2.interval[0]) {
+                    return i1.interval[0] - i2.interval[0];
+                } else {
+                    return i1.interval[1] - i2.interval[1];
+                }
+            }
+        });
+        int[] res = new int[len];
+        Arrays.fill(res, -1);
+        for (int i = 0; i < len - 1; i++) {
+            if (l.get(i).interval[0] == l.get(i).interval[1]) {
+                res[l.get(i).idx] = l.get(i).idx;
+                continue;
+            }
+            for (int j = i + 1; j < len; j++) {
+                if (l.get(j).interval[0] >= l.get(i).interval[1]) {
+                    res[l.get(i).idx] = l.get(j).idx;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+}
+
+class Interval {
+    int idx;
+    int[] interval;
+
+    Interval(int idx, int[] interval) {
+        this.idx = idx;
+        this.interval = interval;
+    }
+}
+```
+
+
+
 ## 1366. 通过投票对团队排名
 
 ![](D:\Notes\Leetcode\Leetcode.assets\1366.png)

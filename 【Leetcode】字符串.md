@@ -121,3 +121,32 @@ class Solution {
 }
 ```
 
+
+
+## 2414. 最长的字母序连续子字符串的长度
+
+![](D:\Notes\Leetcode\Leetcode.assets\2414.png)
+
+我的AC代码（Java）：
+
+```java
+class Solution {
+    public int longestContinuousSubstring(String s) {
+        char[] arr = s.toCharArray();
+        int len = 1;
+        int max_len = 1;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] - arr[i - 1] == 1) {
+                len++;
+            } else {
+                len = 1;
+            }
+            if (max_len < len) {
+                max_len = len;
+            }
+        }
+        return max_len;
+    }
+}
+```
+
